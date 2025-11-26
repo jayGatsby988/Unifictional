@@ -73,7 +73,8 @@ export function LoadingAnimation({ onComplete }: LoadingAnimationProps) {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ 
-          exit: { duration: 1, ease: [0.16, 1, 0.3, 1] }
+          duration: 1, 
+          ease: [0.16, 1, 0.3, 1]
         }}
         className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-white"
         style={{
