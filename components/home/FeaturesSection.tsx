@@ -50,33 +50,33 @@ export function FeaturesSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-12 md:mb-16 px-4"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#111827] mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#111827] mb-3 sm:mb-4">
             Everything you need to{' '}
             <span className="bg-gradient-to-r from-gold to-blue bg-clip-text text-transparent">
               grow faster
             </span>
           </h2>
-          <p className="text-lg text-[#6B7280] max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-[#6B7280] max-w-2xl mx-auto">
             Powerful features designed to help agencies, freelancers, and brands scale their growth without the complexity.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {features.map((feature, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+              className="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-7 md:p-8 shadow-sm border border-gray-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
             >
-              <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-gold to-blue flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                <feature.icon className="h-6 w-6 text-white" />
+              <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-lg sm:rounded-xl bg-gradient-to-br from-gold to-blue flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
+                <feature.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-[#111827] mb-3">{feature.title}</h3>
-              <p className="text-[#6B7280] leading-relaxed">{feature.description}</p>
+              <h3 className="text-lg sm:text-xl font-bold text-[#111827] mb-2 sm:mb-3">{feature.title}</h3>
+              <p className="text-sm sm:text-base text-[#6B7280] leading-relaxed">{feature.description}</p>
             </motion.div>
           ))}
         </div>

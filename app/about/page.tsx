@@ -48,20 +48,20 @@ export default function AboutPage() {
 
   return (
     <>
-      <SectionContainer className="bg-gradient-to-b from-white to-[#F9FAFB] pt-32">
+      <SectionContainer className="bg-gradient-to-b from-white to-[#F9FAFB] pt-24 sm:pt-28 md:pt-32">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#111827] mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#111827] mb-4 sm:mb-6 px-4">
             Building the future of{' '}
             <span className="bg-gradient-to-r from-gold to-blue bg-clip-text text-transparent">
               AI-powered growth
             </span>
           </h1>
-          <p className="text-xl text-[#6B7280] max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-[#6B7280] max-w-3xl mx-auto px-4">
             We're on a mission to make sophisticated AI tools accessible to every agency, freelancer, and brand that wants to scale.
           </p>
         </motion.div>
@@ -70,11 +70,11 @@ export default function AboutPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-4xl mx-auto mb-20"
+          className="max-w-4xl mx-auto mb-12 sm:mb-16 md:mb-20"
         >
-          <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-gray-200">
-            <h2 className="text-3xl font-bold text-[#111827] mb-6">Our Story</h2>
-            <div className="space-y-4 text-[#6B7280] text-lg leading-relaxed">
+          <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 shadow-xl border border-gray-200">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#111827] mb-4 sm:mb-6">Our Story</h2>
+            <div className="space-y-3 sm:space-y-4 text-[#6B7280] text-base sm:text-lg leading-relaxed">
               <p>
                 Unifictional was born from frustration. Our founder, Trishank, was running a growing marketing agency and drowning in disconnected tools. One platform for leads, another for ads, a third for analytics—and none of them talking to each other.
               </p>
@@ -95,23 +95,23 @@ export default function AboutPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mb-20"
+          className="mb-12 sm:mb-16 md:mb-20"
         >
-          <h2 className="text-3xl font-bold text-[#111827] text-center mb-12">Our Values</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#111827] text-center mb-8 sm:mb-12">Our Values</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {values.map((value, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
-                className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 hover:shadow-lg transition-shadow duration-300"
+                className="bg-white rounded-xl sm:rounded-2xl p-5 sm:p-6 shadow-sm border border-gray-200 hover:shadow-lg transition-shadow duration-300"
               >
-                <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-gold to-blue flex items-center justify-center mb-4">
-                  <value.icon className="h-6 w-6 text-white" />
+                <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-lg sm:rounded-xl bg-gradient-to-br from-gold to-blue flex items-center justify-center mb-3 sm:mb-4">
+                  <value.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-[#111827] mb-2">{value.title}</h3>
-                <p className="text-[#6B7280]">{value.description}</p>
+                <h3 className="text-lg sm:text-xl font-bold text-[#111827] mb-2">{value.title}</h3>
+                <p className="text-sm sm:text-base text-[#6B7280]">{value.description}</p>
               </motion.div>
             ))}
           </div>
@@ -121,27 +121,27 @@ export default function AboutPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="mb-20"
+          className="mb-12 sm:mb-16 md:mb-20"
         >
-          <h2 className="text-3xl font-bold text-[#111827] text-center mb-12">Our Journey</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#111827] text-center mb-8 sm:mb-12">Our Journey</h2>
           <div className="max-w-4xl mx-auto">
             <div className="relative">
-              <div className="absolute left-12 top-0 bottom-0 w-0.5 bg-gradient-to-b from-gold to-blue"></div>
-              <div className="space-y-12">
+              <div className="absolute left-8 sm:left-10 md:left-12 top-0 bottom-0 w-0.5 bg-gradient-to-b from-gold to-blue"></div>
+              <div className="space-y-8 sm:space-y-12">
                 {milestones.map((milestone, i) => (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, delay: 0.6 + i * 0.1 }}
-                    className="relative flex items-center space-x-6"
+                    className="relative flex items-center space-x-4 sm:space-x-6"
                   >
-                    <div className="flex-shrink-0 h-24 w-24 rounded-full bg-gradient-to-br from-gold to-blue flex items-center justify-center text-white font-bold text-sm leading-tight shadow-lg z-10 text-center p-2">
+                    <div className="flex-shrink-0 h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 rounded-full bg-gradient-to-br from-gold to-blue flex items-center justify-center text-white font-bold text-xs sm:text-sm leading-tight shadow-lg z-10 text-center p-2">
                       <span className="block">{milestone.year}</span>
                     </div>
-                    <div className="flex-1 bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                      <h3 className="text-xl font-bold text-[#111827] mb-2">{milestone.title}</h3>
-                      <p className="text-[#6B7280]">{milestone.description}</p>
+                    <div className="flex-1 bg-white rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 shadow-sm border border-gray-200">
+                      <h3 className="text-base sm:text-lg md:text-xl font-bold text-[#111827] mb-1 sm:mb-2">{milestone.title}</h3>
+                      <p className="text-sm sm:text-base text-[#6B7280]">{milestone.description}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -154,15 +154,15 @@ export default function AboutPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.7 }}
-          className="mt-20"
+          className="mt-12 sm:mt-16 md:mt-20"
         >
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-5 gap-0 items-stretch bg-white rounded-3xl overflow-hidden shadow-2xl border border-gray-100">
+            <div className="grid lg:grid-cols-5 gap-0 items-stretch bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-gray-100">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
-                className="lg:col-span-2 relative bg-gradient-to-br from-[#1F4F9A] via-[#2563EB] to-[#3B82F6] p-12 flex items-center justify-center"
+                className="lg:col-span-2 relative bg-gradient-to-br from-[#1F4F9A] via-[#2563EB] to-[#3B82F6] p-8 sm:p-10 md:p-12 flex items-center justify-center min-h-[400px] lg:min-h-0"
               >
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(246,184,0,0.15),transparent_70%)]"></div>
                 <div className="relative z-10 text-center">
@@ -170,10 +170,10 @@ export default function AboutPage() {
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 0.6, delay: 1 }}
-                    className="mb-8"
+                    className="mb-6 sm:mb-8"
                   >
-                    <div className="h-56 w-56 rounded-full bg-white/10 backdrop-blur-md border-4 border-white/30 flex items-center justify-center mx-auto shadow-2xl">
-                      <span className="text-white font-black text-8xl tracking-tight">TM</span>
+                    <div className="h-40 w-40 sm:h-48 sm:w-48 md:h-56 md:w-56 rounded-full bg-white/10 backdrop-blur-md border-3 sm:border-4 border-white/30 flex items-center justify-center mx-auto shadow-2xl">
+                      <span className="text-white font-black text-6xl sm:text-7xl md:text-8xl tracking-tight">TM</span>
                     </div>
                   </motion.div>
                   <motion.div
@@ -181,9 +181,9 @@ export default function AboutPage() {
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.6, delay: 1.2 }}
                   >
-                    <div className="inline-block bg-gradient-to-r from-[#F6B800] to-[#FCD34D] px-8 py-4 rounded-2xl shadow-xl">
-                      <p className="text-[#1F4F9A] font-black text-3xl">Founder & CEO</p>
-                      <p className="text-[#1F4F9A] text-sm font-semibold mt-1">Visionary Leader</p>
+                    <div className="inline-block bg-gradient-to-r from-[#F6B800] to-[#FCD34D] px-6 py-3 sm:px-8 sm:py-4 rounded-xl sm:rounded-2xl shadow-xl">
+                      <p className="text-[#1F4F9A] font-black text-2xl sm:text-3xl">Founder & CEO</p>
+                      <p className="text-[#1F4F9A] text-xs sm:text-sm font-semibold mt-1">Visionary Leader</p>
                     </div>
                   </motion.div>
                 </div>
@@ -193,19 +193,19 @@ export default function AboutPage() {
                 initial={{ opacity: 0, x: 30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.9 }}
-                className="lg:col-span-3 p-10 md:p-14 flex flex-col justify-center bg-gradient-to-br from-white to-gray-50"
+                className="lg:col-span-3 p-6 sm:p-8 md:p-10 lg:p-14 flex flex-col justify-center bg-gradient-to-br from-white to-gray-50"
               >
-                <div className="mb-3">
-                  <span className="inline-block px-4 py-1.5 bg-blue/10 text-blue text-xs font-bold rounded-full mb-4">
+                <div className="mb-2 sm:mb-3">
+                  <span className="inline-block px-3 sm:px-4 py-1.5 bg-blue/10 text-blue text-xs font-bold rounded-full mb-3 sm:mb-4">
                     LEADERSHIP
                   </span>
                 </div>
-                <h2 className="text-5xl font-black text-[#111827] mb-3 tracking-tight">Meet the Founder</h2>
-                <h3 className="text-4xl font-bold bg-gradient-to-r from-[#F6B800] via-[#FCD34D] to-[#F6B800] bg-clip-text text-transparent mb-8">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#111827] mb-2 sm:mb-3 tracking-tight">Meet the Founder</h2>
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#F6B800] via-[#FCD34D] to-[#F6B800] bg-clip-text text-transparent mb-5 sm:mb-6 md:mb-8">
                   Trishank Methukula
                 </h3>
-                <div className="space-y-5 text-[#4B5563] text-base leading-relaxed">
-                  <p className="text-lg">
+                <div className="space-y-3 sm:space-y-4 md:space-y-5 text-[#4B5563] text-sm sm:text-base leading-relaxed">
+                  <p className="text-base sm:text-lg">
                     Trishank founded <span className="font-semibold text-[#111827]">Unifictional</span> with a singular vision: to revolutionize how businesses leverage AI for exponential growth.
                   </p>
                   <p>

@@ -36,7 +36,7 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <Link href="/" className="flex items-center space-x-2 group">
-            <div className="text-2xl font-black bg-gradient-to-br from-[#1F4F9A] to-[#3B82F6] bg-clip-text text-transparent transition-transform duration-300 group-hover:scale-110">
+            <div className="text-xl sm:text-2xl font-black bg-gradient-to-br from-[#1F4F9A] to-[#3B82F6] bg-clip-text text-transparent transition-transform duration-300 group-hover:scale-105">
               Unifictional
             </div>
           </Link>
@@ -74,20 +74,20 @@ export function Navbar() {
       </div>
 
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white border-b border-gray-200 shadow-lg">
-          <div className="px-4 py-6 space-y-4">
+        <div className="md:hidden bg-white/95 backdrop-blur-lg border-b border-gray-200 shadow-lg">
+          <div className="px-4 py-4 space-y-2">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="block text-[#111827] hover:text-blue transition-colors duration-200 font-medium py-2"
+                className="block text-[#111827] hover:text-blue hover:bg-gray-50 transition-all duration-200 font-medium py-3 px-4 rounded-lg"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.label}
               </Link>
             ))}
-            <div className="pt-4 space-y-3">
-              <Button className="w-full bg-gold hover:bg-gold-600 text-white" asChild>
+            <div className="pt-2">
+              <Button className="w-full bg-gold hover:bg-gold-600 text-white shadow-md" size="lg" asChild>
                 <Link href="/contact">Get Started</Link>
               </Button>
             </div>

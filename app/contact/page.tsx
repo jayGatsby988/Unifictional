@@ -143,59 +143,59 @@ END:VCALENDAR`;
 
   return (
     <>
-      <SectionContainer className="bg-gradient-to-b from-white via-[#F9FAFB] to-white pt-32">
+      <SectionContainer className="bg-gradient-to-b from-white via-[#F9FAFB] to-white pt-24 sm:pt-28 md:pt-32">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-12 md:mb-16 px-4"
         >
-          <div className="inline-block mb-4">
-            <span className="px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-gold-50 to-blue-50 text-gold border border-gold-200">
+          <div className="inline-block mb-3 sm:mb-4">
+            <span className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium bg-gradient-to-r from-gold-50 to-blue-50 text-gold border border-gold-200">
               🚀 Book Your Free Demo
             </span>
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#111827] mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#111827] mb-4 sm:mb-6">
             Ready to{' '}
             <span className="bg-gradient-to-r from-gold to-blue bg-clip-text text-transparent">
               accelerate your growth?
             </span>
           </h1>
-          <p className="text-xl text-[#6B7280] max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-[#6B7280] max-w-3xl mx-auto">
             Book a personalized demo and see exactly how Unifictional can transform your business. No credit card required.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 max-w-5xl mx-auto mb-10 sm:mb-12 md:mb-16">
           {demoHighlights.map((highlight, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
-              className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 text-center hover:shadow-md transition-shadow"
+              className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 shadow-sm border border-gray-200 text-center hover:shadow-md transition-shadow"
             >
-              <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-gold to-blue flex items-center justify-center mx-auto mb-3">
-                <highlight.icon className="h-6 w-6 text-white" />
+              <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-lg sm:rounded-xl bg-gradient-to-br from-gold to-blue flex items-center justify-center mx-auto mb-2 sm:mb-3">
+                <highlight.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
               </div>
-              <h3 className="font-semibold text-[#111827] mb-1 text-sm">{highlight.title}</h3>
-              <p className="text-[#6B7280] text-xs">{highlight.description}</p>
+              <h3 className="font-semibold text-[#111827] mb-1 text-xs sm:text-sm">{highlight.title}</h3>
+              <p className="text-[#6B7280] text-[10px] sm:text-xs leading-tight">{highlight.description}</p>
             </motion.div>
           ))}
         </div>
 
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-gray-200">
+            <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl border border-gray-200">
               {!submitted ? (
                 <>
-                  <h2 className="text-2xl font-bold text-[#111827] mb-2">Book Your Discovery Call</h2>
-                  <p className="text-[#6B7280] mb-6">Fill out the form below and we'll be in touch within 4 hours</p>
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <h2 className="text-xl sm:text-2xl font-bold text-[#111827] mb-2">Book Your Discovery Call</h2>
+                  <p className="text-sm sm:text-base text-[#6B7280] mb-4 sm:mb-6">Fill out the form below and we'll be in touch within 4 hours</p>
+                  <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                     <div>
                       <Label htmlFor="name">Full Name</Label>
                       <Input
@@ -391,22 +391,22 @@ END:VCALENDAR`;
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="space-y-8"
+            className="space-y-6 sm:space-y-8 mt-6 lg:mt-0"
           >
-            <div className="bg-gradient-to-br from-gold-50 via-blue-50 to-gold-50 rounded-3xl p-8 border-2 border-gold-200 shadow-lg">
-              <h3 className="text-2xl font-bold text-[#111827] mb-2">What to expect in your demo</h3>
-              <p className="text-[#6B7280] mb-6">We'll customize the session to your specific needs and goals</p>
-              <ul className="space-y-4">
+            <div className="bg-gradient-to-br from-gold-50 via-blue-50 to-gold-50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border-2 border-gold-200 shadow-lg">
+              <h3 className="text-xl sm:text-2xl font-bold text-[#111827] mb-2">What to expect in your demo</h3>
+              <p className="text-sm sm:text-base text-[#6B7280] mb-4 sm:mb-6">We'll customize the session to your specific needs and goals</p>
+              <ul className="space-y-3 sm:space-y-4">
                 {benefits.map((benefit, i) => (
                   <motion.li
                     key={i}
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.4 + i * 0.1 }}
-                    className="flex items-start space-x-3"
+                    className="flex items-start space-x-2 sm:space-x-3"
                   >
-                    <CheckCircle2 className="h-6 w-6 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span className="text-[#111827] font-medium">{benefit}</span>
+                    <CheckCircle2 className="h-5 w-5 sm:h-6 sm:w-6 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span className="text-sm sm:text-base text-[#111827] font-medium">{benefit}</span>
                   </motion.li>
                 ))}
               </ul>

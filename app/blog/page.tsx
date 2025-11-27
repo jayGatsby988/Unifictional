@@ -62,7 +62,7 @@ export default function BlogPage() {
 
   return (
     <>
-      <SectionContainer className="bg-gradient-to-b from-white to-[#F9FAFB] pt-32">
+      <SectionContainer className="bg-gradient-to-b from-white to-[#F9FAFB] pt-24 sm:pt-28 md:pt-32">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

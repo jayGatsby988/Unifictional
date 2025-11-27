@@ -117,9 +117,9 @@ export function LoadingAnimation({ onComplete }: LoadingAnimationProps) {
         ))}
 
         {/* Main container */}
-        <div className="relative flex flex-col items-center justify-center space-y-12">
+        <div className="relative flex flex-col items-center justify-center space-y-8 sm:space-y-12 px-4">
           {/* Central logo area with orbiting particles */}
-          <div className="relative w-[500px] h-[500px] flex items-center justify-center">
+          <div className="relative w-[280px] h-[280px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] flex items-center justify-center">
             {/* Optimized glow effects - single layer */}
             <motion.div
               animate={{
@@ -131,7 +131,7 @@ export function LoadingAnimation({ onComplete }: LoadingAnimationProps) {
                 repeat: Infinity,
                 ease: 'easeInOut',
               }}
-              className="absolute w-64 h-64 rounded-full blur-[80px] pointer-events-none"
+              className="absolute w-40 h-40 sm:w-52 sm:h-52 md:w-64 md:h-64 rounded-full blur-[60px] sm:blur-[80px] pointer-events-none"
               style={{
                 background: 'radial-gradient(circle, rgba(246, 184, 0, 0.4), rgba(31, 79, 154, 0.3), transparent)',
                 willChange: 'transform, opacity',
@@ -157,10 +157,8 @@ export function LoadingAnimation({ onComplete }: LoadingAnimationProps) {
                 scale: { duration: 1, ease: [0.34, 1.56, 0.64, 1] },
                 opacity: { duration: 0.8 },
               }}
-              className="absolute z-20"
+              className="absolute z-20 w-32 h-32 sm:w-40 sm:h-40 md:w-44 md:h-44"
               style={{
-                width: '180px',
-                height: '180px',
                 willChange: 'transform, opacity',
               }}
             >
@@ -198,8 +196,8 @@ export function LoadingAnimation({ onComplete }: LoadingAnimationProps) {
                     }}
                     className="relative w-full h-full flex items-center justify-center"
                   >
-                    {/* Clean "U" letter */}
-                    <div className="text-8xl font-black bg-gradient-to-br from-[#1F4F9A] to-[#3B82F6] bg-clip-text text-transparent">
+                    {/* Clean "U" letter - responsive sizing */}
+                    <div className="text-6xl sm:text-7xl md:text-8xl font-black bg-gradient-to-br from-[#1F4F9A] to-[#3B82F6] bg-clip-text text-transparent">
                       U
                     </div>
                   </motion.div>
@@ -266,9 +264,9 @@ export function LoadingAnimation({ onComplete }: LoadingAnimationProps) {
                       }}
                     >
                       <div
-                        className={`relative w-16 h-16 rounded-2xl shadow-xl flex items-center justify-center bg-gradient-to-br ${particle.gradient} border border-white/20`}
+                        className={`relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl shadow-xl flex items-center justify-center bg-gradient-to-br ${particle.gradient} border border-white/20`}
                       >
-                        <particle.icon className="w-8 h-8 text-white" />
+                        <particle.icon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
                       </div>
                       
                       {/* Simplified connection line */}
@@ -321,7 +319,7 @@ export function LoadingAnimation({ onComplete }: LoadingAnimationProps) {
                         ease: 'linear',
                       }
                     }}
-                    className="absolute w-[500px] h-[500px]"
+                    className="absolute w-[280px] h-[280px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px]"
                     style={{
                       transformOrigin: 'center center',
                       willChange: 'transform',
@@ -342,12 +340,12 @@ export function LoadingAnimation({ onComplete }: LoadingAnimationProps) {
                         transition={{
                           rotate: { duration: 18, repeat: Infinity, ease: 'linear' },
                         }}
-                        className="w-10 h-10 rounded-xl bg-white shadow-md border border-gray-100 flex items-center justify-center"
+                        className="w-7 h-7 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-lg sm:rounded-xl bg-white shadow-md border border-gray-100 flex items-center justify-center"
                         style={{
                           willChange: 'transform',
                         }}
                       >
-                        <particle.icon className="w-5 h-5" style={{ color: particle.color }} />
+                        <particle.icon className="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5" style={{ color: particle.color }} />
                       </motion.div>
                     </motion.div>
                   </motion.div>
@@ -355,34 +353,44 @@ export function LoadingAnimation({ onComplete }: LoadingAnimationProps) {
               })}
             </AnimatePresence>
 
-            {/* Simplified rotating rings - fade out during whoosh */}
-            {!startWhoosh && [0, 1, 2].map((index) => (
-              <motion.div
-                key={`ring-${index}`}
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{
-                  scale: 1,
-                  opacity: 1,
-                  rotate: index % 2 === 0 ? 360 : -360,
-                }}
-                transition={{
-                  scale: { duration: 0.7, ease: 'backOut', delay: 0.2 + index * 0.1 },
-                  opacity: { duration: 0.5, delay: 0.2 + index * 0.1 },
-                  rotate: {
-                    duration: 20 + index * 5,
-                    repeat: Infinity,
-                    ease: 'linear',
-                  },
-                }}
-                className="absolute rounded-full pointer-events-none"
-                style={{
-                  width: `${220 + index * 50}px`,
-                  height: `${220 + index * 50}px`,
-                  border: index % 2 === 0 ? '2px dashed rgba(246, 184, 0, 0.15)' : '2px dotted rgba(31, 79, 154, 0.15)',
-                  willChange: 'transform',
-                }}
-              />
-            ))}
+            {/* Simplified rotating rings - fixed responsive sizing */}
+            {!startWhoosh && [0, 1, 2].map((index) => {
+              // Fixed sizes for each ring - mobile optimized
+              const sizes = [
+                { mobile: 140, tablet: 180, desktop: 220 },
+                { mobile: 170, tablet: 220, desktop: 270 },
+                { mobile: 200, tablet: 260, desktop: 320 },
+              ];
+              const size = sizes[index];
+              
+              return (
+                <motion.div
+                  key={`ring-${index}`}
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{
+                    scale: 1,
+                    opacity: 1,
+                    rotate: index % 2 === 0 ? 360 : -360,
+                  }}
+                  transition={{
+                    scale: { duration: 0.7, ease: 'backOut', delay: 0.2 + index * 0.1 },
+                    opacity: { duration: 0.5, delay: 0.2 + index * 0.1 },
+                    rotate: {
+                      duration: 20 + index * 5,
+                      repeat: Infinity,
+                      ease: 'linear',
+                    },
+                  }}
+                  className="absolute rounded-full pointer-events-none"
+                  style={{
+                    width: `${size.desktop}px`,
+                    height: `${size.desktop}px`,
+                    border: index % 2 === 0 ? '2px dashed rgba(246, 184, 0, 0.15)' : '2px dotted rgba(31, 79, 154, 0.15)',
+                    willChange: 'transform',
+                  }}
+                />
+              );
+            })}
           </div>
 
           {/* Optimized text animations - fade out during whoosh */}
@@ -431,7 +439,7 @@ export function LoadingAnimation({ onComplete }: LoadingAnimationProps) {
               transition={{ delay: 1, duration: 0.5 }}
               className="w-72 mx-auto"
             >
-              <div className="relative h-2.5 bg-gray-100 rounded-full overflow-hidden border border-gray-200 shadow-inner">
+              <div className="relative h-2 sm:h-2.5 bg-gray-100 rounded-full overflow-hidden border border-gray-200 shadow-inner">
                 <motion.div
                   className="absolute top-0 left-0 h-full rounded-full"
                   style={{
@@ -457,12 +465,12 @@ export function LoadingAnimation({ onComplete }: LoadingAnimationProps) {
                 </motion.div>
               </div>
               
-              <div className="flex justify-between items-center mt-2.5">
-                <p className="text-xs font-medium text-[#9CA3AF]">
+              <div className="flex justify-between items-center mt-2 sm:mt-2.5">
+                <p className="text-[10px] sm:text-xs font-medium text-[#9CA3AF]">
                   Loading
                 </p>
                 <motion.p
-                  className="text-sm font-bold text-[#1F4F9A]"
+                  className="text-xs sm:text-sm font-bold text-[#1F4F9A]"
                   animate={{ 
                     scale: [1, 1.05, 1],
                   }}

@@ -54,26 +54,26 @@ export function StatsSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-10 md:mb-12 px-4"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#111827] mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#111827] mb-3 sm:mb-4">
             Real results from real users
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
           {stats.map((stat, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="text-center"
+              className="text-center px-4"
             >
-              <div className="text-5xl sm:text-6xl font-bold bg-gradient-to-r from-gold to-blue bg-clip-text text-transparent mb-4">
+              <div className="text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-gold to-blue bg-clip-text text-transparent mb-3 sm:mb-4">
                 <Counter end={stat.value} suffix={stat.suffix} prefix={i === 0 ? '+' : ''} />
               </div>
-              <p className="text-[#6B7280] text-lg">{stat.label}</p>
+              <p className="text-[#6B7280] text-sm sm:text-base md:text-lg">{stat.label}</p>
             </motion.div>
           ))}
         </div>

@@ -98,14 +98,14 @@ export default function PricingPage() {
 
   return (
     <>
-      <SectionContainer className="bg-gradient-to-b from-white to-[#F9FAFB] pt-32">
+      <SectionContainer className="bg-gradient-to-b from-white to-[#F9FAFB] pt-24 sm:pt-28 md:pt-32">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#111827] mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#111827] mb-4 sm:mb-6 px-4">
             Simple,{' '}
             <span className="bg-gradient-to-r from-gold to-blue bg-clip-text text-transparent">
               transparent pricing

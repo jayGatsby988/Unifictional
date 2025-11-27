@@ -49,15 +49,15 @@ export function FAQSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-12 md:mb-16 px-4"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#111827] mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#111827] mb-3 sm:mb-4">
             Frequently asked{' '}
             <span className="bg-gradient-to-r from-gold to-blue bg-clip-text text-transparent">
               questions
             </span>
           </h2>
-          <p className="text-lg text-[#6B7280] max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-[#6B7280] max-w-2xl mx-auto">
             Everything you need to know about Unifictional. Can't find the answer you're looking for? Reach out to our team.
           </p>
         </motion.div>
@@ -68,17 +68,17 @@ export function FAQSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="max-w-3xl mx-auto"
         >
-          <Accordion type="single" collapsible className="space-y-4">
+          <Accordion type="single" collapsible className="space-y-3 sm:space-y-4">
             {faqs.map((faq, i) => (
               <AccordionItem
                 key={i}
                 value={`item-${i}`}
-                className="bg-gray-50 border border-gray-200 rounded-lg px-6"
+                className="bg-gray-50 border border-gray-200 rounded-lg px-4 sm:px-6"
               >
-                <AccordionTrigger className="text-left font-semibold text-[#111827] hover:no-underline">
+                <AccordionTrigger className="text-left font-semibold text-[#111827] hover:no-underline text-sm sm:text-base">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-[#6B7280] leading-relaxed">
+                <AccordionContent className="text-[#6B7280] leading-relaxed text-sm sm:text-base">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>

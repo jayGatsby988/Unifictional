@@ -38,41 +38,41 @@ export function TestimonialsSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-12 md:mb-16 px-4"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#111827] mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#111827] mb-3 sm:mb-4">
             Trusted by{' '}
             <span className="bg-gradient-to-r from-gold to-blue bg-clip-text text-transparent">
               growth leaders
             </span>
           </h2>
-          <p className="text-lg text-[#6B7280] max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-[#6B7280] max-w-2xl mx-auto">
             See what agencies, freelancers, and brands are saying about Unifictional.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {testimonials.map((testimonial, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200 hover:shadow-lg transition-shadow duration-300"
+              className="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-7 md:p-8 shadow-sm border border-gray-200 hover:shadow-lg transition-shadow duration-300"
             >
-              <div className="flex items-center space-x-1 mb-4">
+              <div className="flex items-center space-x-1 mb-3 sm:mb-4">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-gold text-gold" />
+                  <Star key={i} className="h-3.5 w-3.5 sm:h-4 sm:w-4 fill-gold text-gold" />
                 ))}
               </div>
-              <p className="text-[#111827] mb-6 leading-relaxed">{testimonial.content}</p>
+              <p className="text-sm sm:text-base text-[#111827] mb-4 sm:mb-6 leading-relaxed">{testimonial.content}</p>
               <div className="flex items-center space-x-3">
-                <div className="h-12 w-12 rounded-full bg-gradient-to-br from-gold to-blue flex items-center justify-center text-white font-bold">
+                <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-gradient-to-br from-gold to-blue flex items-center justify-center text-white font-bold text-sm sm:text-base">
                   {testimonial.avatar}
                 </div>
                 <div>
-                  <div className="font-semibold text-[#111827]">{testimonial.name}</div>
-                  <div className="text-sm text-[#6B7280]">{testimonial.role}</div>
+                  <div className="font-semibold text-[#111827] text-sm sm:text-base">{testimonial.name}</div>
+                  <div className="text-xs sm:text-sm text-[#6B7280]">{testimonial.role}</div>
                 </div>
               </div>
             </motion.div>

@@ -19,7 +19,7 @@ export function CTASection() {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={isInView ? { opacity: 1, scale: 1 } : {}}
         transition={{ duration: 0.6 }}
-        className="relative overflow-hidden bg-gradient-to-br from-gold via-gold-400 to-blue rounded-3xl p-12 md:p-16 text-center shadow-2xl"
+        className="relative overflow-hidden bg-gradient-to-br from-gold via-gold-400 to-blue rounded-2xl sm:rounded-3xl p-8 sm:p-10 md:p-12 lg:p-16 text-center shadow-2xl"
       >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.2),transparent_50%)]"></div>
         <div className="relative z-10">
@@ -27,7 +27,7 @@ export function CTASection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 px-4"
           >
             Ready to unify your AI stack?
           </motion.h2>
@@ -35,7 +35,7 @@ export function CTASection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg sm:text-xl text-white/90 mb-8 max-w-2xl mx-auto"
+            className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto px-4"
           >
             Join hundreds of agencies, freelancers, and brands who are scaling faster with Unifictional.
           </motion.p>
@@ -43,22 +43,22 @@ export function CTASection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4"
           >
             <Button
               size="lg"
-              className="bg-white text-blue hover:bg-gray-100 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-200 text-base px-8"
+              className="bg-white text-blue hover:bg-gray-100 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-200 text-sm sm:text-base px-6 sm:px-8 w-full sm:w-auto"
               asChild
             >
               <Link href="/contact">
                 Start Free Trial
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
               </Link>
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="border-2 border-white bg-transparent text-white hover:bg-white hover:text-blue transition-all duration-200 text-base px-8 backdrop-blur-sm"
+              className="border-2 border-white bg-transparent text-white hover:bg-white hover:text-blue transition-all duration-200 text-sm sm:text-base px-6 sm:px-8 backdrop-blur-sm w-full sm:w-auto"
               asChild
             >
               <Link href="/contact">Book a Demo</Link>
@@ -68,7 +68,7 @@ export function CTASection() {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-8 text-white/80 text-sm"
+            className="mt-6 sm:mt-8 text-white/80 text-xs sm:text-sm"
           >
             No credit card required · 14-day free trial · Cancel anytime
           </motion.div>
