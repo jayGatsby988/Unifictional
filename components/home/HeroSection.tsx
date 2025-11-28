@@ -126,7 +126,7 @@ export function HeroSection() {
                     transition={{ delay: 0.3 + i * 0.1 }}
                     className="bg-white rounded-xl p-3 sm:p-4 shadow-sm border border-gray-200 lg:flex lg:items-center lg:justify-between"
                   >
-                    {/* Mobile: Vertical layout, Desktop: Horizontal */}
+                    {/* Mobile: Vertical centered layout, Desktop: Horizontal */}
                     <div className="flex flex-col lg:flex-row items-center lg:items-center space-y-2 lg:space-y-0 lg:space-x-3 text-center lg:text-left">
                       <div className={`h-12 w-12 sm:h-14 sm:w-14 rounded-xl ${item.iconBg} flex items-center justify-center shadow-sm flex-shrink-0`}>
                         <item.Icon className={`h-6 w-6 sm:h-7 sm:w-7 ${item.iconColor}`} />
@@ -136,9 +136,12 @@ export function HeroSection() {
                         <p className="text-[10px] sm:text-xs text-[#6B7280] hidden lg:block">Updated just now</p>
                       </div>
                     </div>
-                    <span className={`mt-2 lg:mt-0 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full font-medium text-[10px] sm:text-xs ${item.color} inline-block`}>
-                      {item.status}
-                    </span>
+                    {/* Centered badge on mobile, right-aligned on desktop */}
+                    <div className="flex justify-center lg:justify-end mt-2 lg:mt-0">
+                      <span className={`px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full font-medium text-[10px] sm:text-xs ${item.color} inline-block`}>
+                        {item.status}
+                      </span>
+                    </div>
                   </motion.div>
                 ))}
               </div>

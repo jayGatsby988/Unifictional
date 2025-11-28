@@ -19,6 +19,7 @@ import { CheckCircle2, Mail, MessageSquare, Calendar, Clock, Video, Zap, Trendin
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [emailError, setEmailError] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -29,8 +30,32 @@ export default function ContactPage() {
     message: '',
   });
 
+  // Email validation function
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const email = e.target.value;
+    setFormData({ ...formData, email });
+    
+    if (email && !validateEmail(email)) {
+      setEmailError('Please enter a valid email address');
+    } else {
+      setEmailError('');
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Final email validation
+    if (!validateEmail(formData.email)) {
+      setEmailError('Please enter a valid email address');
+      return;
+    }
+    
     setLoading(true);
 
     try {
@@ -210,16 +235,28 @@ END:VCALENDAR`;
                     </div>
 
                     <div>
-                      <Label htmlFor="email">Work Email</Label>
+                      <Label htmlFor="email">Work Email *</Label>
                       <Input
                         id="email"
                         type="email"
                         placeholder="john@company.com"
                         required
-                        className="mt-2"
+                        className={`mt-2 ${emailError ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}`}
                         value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        onChange={handleEmailChange}
                       />
+                      {emailError && (
+                        <p className="mt-1.5 text-xs text-red-600 flex items-center">
+                          <span className="mr-1">⚠️</span>
+                          {emailError}
+                        </p>
+                      )}
+                      {formData.email && !emailError && (
+                        <p className="mt-1.5 text-xs text-green-600 flex items-center">
+                          <span className="mr-1">✓</span>
+                          Valid email address
+                        </p>
+                      )}
                     </div>
 
                     <div>
@@ -293,8 +330,8 @@ END:VCALENDAR`;
                     <Button
                       type="submit"
                       size="lg"
-                      disabled={loading}
-                      className="w-full bg-gradient-to-r from-gold to-blue hover:opacity-90 text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                      disabled={loading || !!emailError || !formData.email}
+                      className="w-full bg-gradient-to-r from-gold to-blue hover:opacity-90 text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                     >
                       {loading ? 'Sending...' : 'Book My Free Demo →'}
                     </Button>

@@ -11,48 +11,52 @@ export function CaseStudiesSection() {
 
   const caseStudies = [
     {
-      category: 'Personal Brand',
-      problem: 'Zero organic reach and no systematic growth',
+      category: 'Home Services',
+      problem: 'Zero online leads, relying only on word-of-mouth referrals',
+      before: 'No website traffic, manual follow-ups, missing opportunities',
       metrics: [
-        { value: '+12.4K', label: 'Instagram Growth', subLabel: '6 months' },
-        { value: '8.2%', label: 'Engagement Rate', subLabel: 'avg' },
+        { value: '+340%', label: 'Lead Volume', subLabel: '4 months' },
+        { value: '$48K', label: 'New Revenue', subLabel: 'monthly' },
       ],
-      quote: 'From 400 followers to building a real community. The content strategy and automation are game-changing.',
-      author: 'Alex Rivera',
-      role: 'Coach & Speaker',
+      quote: 'I was turning down jobs because I couldn\'t keep up with follow-ups. Now the AI handles it all, and I have a waitlist of clients.',
+      author: 'Mike Rodriguez',
+      role: 'Bathroom Remodeling Contractor',
     },
     {
-      category: 'E-commerce Brand',
-      problem: 'High ad spend with declining ROAS',
+      category: 'Local Business',
+      problem: 'Wasting $3K/month on Facebook ads with no clear ROI',
+      before: 'Random targeting, no lead tracking, couldn\'t measure what worked',
       metrics: [
-        { value: '3.8x', label: 'ROAS Increase', subLabel: '90 days' },
-        { value: '-42%', label: 'Cost Per Lead', subLabel: 'reduction' },
+        { value: '4.2x', label: 'ROAS', subLabel: 'return on ad spend' },
+        { value: '-65%', label: 'Cost Per Lead', subLabel: 'reduction' },
       ],
-      quote: 'The AI ad testing found winning combinations we never would have tried manually. Revenue is up 280%.',
-      author: 'Sarah Chen',
-      role: 'E-commerce Founder',
+      quote: 'The AI showed me exactly which ads worked and who to target. I cut my ad budget in half and tripled my bookings.',
+      author: 'Jennifer Martinez',
+      role: 'Fitness Studio Owner',
     },
     {
-      category: 'Marketing Agency',
-      problem: 'Juggling 15 clients with fragmented tools',
+      category: 'Freelance Services',
+      problem: 'Juggling 12 clients with spreadsheets and constant context switching',
+      before: 'Lost leads in email, manual invoicing, no systematic follow-up process',
       metrics: [
-        { value: '20hrs', label: 'Time Saved', subLabel: 'per week' },
-        { value: '+85%', label: 'Client Retention', subLabel: 'improved' },
+        { value: '18hrs', label: 'Time Saved', subLabel: 'weekly' },
+        { value: '+150%', label: 'Client Capacity', subLabel: 'increased' },
       ],
-      quote: 'We consolidated 6 tools into one platform. Client reporting alone saves us days every month.',
-      author: 'Marcus Johnson',
-      role: 'Agency Owner',
+      quote: 'I went from barely managing 8 clients to easily handling 20. The automation gave me my evenings back.',
+      author: 'David Thompson',
+      role: 'Real Estate Photographer',
     },
     {
-      category: 'SaaS Startup',
-      problem: 'No clear lead qualification process',
+      category: 'Professional Services',
+      problem: 'Spending 15 hours/week on admin tasks instead of billable work',
+      before: 'Manual lead qualification, missed follow-ups, no automation',
       metrics: [
-        { value: '62%', label: 'Lead Quality', subLabel: 'increase' },
-        { value: '2.1x', label: 'Conversion Rate', subLabel: 'improved' },
+        { value: '85%', label: 'Admin Time', subLabel: 'reduced' },
+        { value: '+$5.2K', label: 'Monthly Income', subLabel: 'increase' },
       ],
-      quote: 'The AI scoring helped our sales team focus on the right leads. Close rate doubled in 60 days.',
-      author: 'Emily Watson',
-      role: 'Head of Growth',
+      quote: 'The lead scoring is incredibly accurate. I now spend my time on high-value clients instead of tire-kickers.',
+      author: 'Rachel Kim',
+      role: 'Business Attorney',
     },
   ];
 
@@ -74,16 +78,16 @@ export function CaseStudiesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-12 md:mb-16 px-4"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#111827] mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#111827] mb-3 sm:mb-4">
             Proven Growth,{' '}
             <span className="bg-gradient-to-r from-gold to-blue bg-clip-text text-transparent">
               Real Results
             </span>
           </h2>
-          <p className="text-lg text-[#6B7280] max-w-2xl mx-auto">
-            See how businesses like yours are achieving measurable growth with Unifictional
+          <p className="text-base sm:text-lg text-[#6B7280] max-w-2xl mx-auto">
+            See how real businesses like yours achieved measurable growth with Unifictional
           </p>
         </motion.div>
 
@@ -95,7 +99,7 @@ export function CaseStudiesSection() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4 }}
-              className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-gray-200"
+              className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 shadow-xl border border-gray-200"
             >
               <div className="mb-6">
                 <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium bg-gold-50 text-gold border border-gold-200">
@@ -103,36 +107,64 @@ export function CaseStudiesSection() {
                 </span>
               </div>
 
-              <p className="text-[#6B7280] text-lg mb-8">{currentCase.problem}</p>
-
-              <div className="grid sm:grid-cols-2 gap-6 mb-8">
-                {currentCase.metrics.map((metric, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.2 + i * 0.1 }}
-                    className="bg-gradient-to-br from-gold-50 to-blue-50 rounded-2xl p-6 border border-gold-200"
-                  >
-                    <div className="text-4xl font-bold bg-gradient-to-r from-gold to-blue bg-clip-text text-transparent mb-2">
-                      {metric.value}
+              {/* Clear "Before" Problem Section */}
+              <div className="bg-red-50 border-l-4 border-red-400 rounded-lg p-5 mb-6">
+                <div className="flex items-start space-x-3">
+                  <div className="flex-shrink-0">
+                    <div className="h-6 w-6 rounded-full bg-red-100 flex items-center justify-center">
+                      <span className="text-red-600 font-bold text-sm">!</span>
                     </div>
-                    <div className="text-[#111827] font-semibold mb-1">{metric.label}</div>
-                    <div className="text-[#6B7280] text-sm">{metric.subLabel}</div>
-                  </motion.div>
-                ))}
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-red-900 mb-1">THE PROBLEM</h4>
+                    <p className="text-red-800 font-semibold mb-2">{currentCase.problem}</p>
+                    <p className="text-red-700 text-sm">{currentCase.before}</p>
+                  </div>
+                </div>
               </div>
 
-              <div className="bg-[#F9FAFB] rounded-2xl p-6 border border-gray-200">
-                <div className="flex items-start space-x-4">
-                  <Quote className="h-8 w-8 text-gold flex-shrink-0" />
+              {/* Results - "After" Section */}
+              <div className="mb-6">
+                <h4 className="text-sm font-bold text-green-700 mb-3 flex items-center">
+                  <span className="inline-block h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mr-2">
+                    <span className="text-green-600 font-bold text-lg">✓</span>
+                  </span>
+                  THE RESULTS
+                </h4>
+                <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
+                  {currentCase.metrics.map((metric, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.2 + i * 0.1 }}
+                      className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl sm:rounded-2xl p-5 sm:p-6 border-2 border-green-200 shadow-sm"
+                    >
+                      <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-2">
+                        {metric.value}
+                      </div>
+                      <div className="text-[#111827] font-semibold mb-1 text-sm sm:text-base">{metric.label}</div>
+                      <div className="text-[#6B7280] text-xs sm:text-sm">{metric.subLabel}</div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-5 sm:p-6 border border-blue-200 shadow-sm">
+                <div className="flex items-start space-x-3 sm:space-x-4">
+                  <Quote className="h-7 w-7 sm:h-8 sm:w-8 text-[#1F4F9A] flex-shrink-0 mt-1" />
                   <div>
-                    <p className="text-[#111827] text-lg leading-relaxed mb-4">
+                    <p className="text-[#111827] text-base sm:text-lg leading-relaxed mb-4 italic">
                       "{currentCase.quote}"
                     </p>
-                    <div>
-                      <div className="font-semibold text-[#111827]">{currentCase.author}</div>
-                      <div className="text-sm text-[#6B7280]">{currentCase.role}</div>
+                    <div className="flex items-center space-x-3">
+                      <div className="h-12 w-12 rounded-full bg-gradient-to-br from-[#1F4F9A] to-[#3B82F6] flex items-center justify-center text-white font-bold text-sm">
+                        {currentCase.author.split(' ').map(n => n[0]).join('')}
+                      </div>
+                      <div>
+                        <div className="font-bold text-[#111827] text-sm sm:text-base">{currentCase.author}</div>
+                        <div className="text-xs sm:text-sm text-[#6B7280]">{currentCase.role}</div>
+                      </div>
                     </div>
                   </div>
                 </div>
