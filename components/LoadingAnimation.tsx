@@ -15,7 +15,7 @@ export function LoadingAnimation({ onComplete }: LoadingAnimationProps) {
   const [startWhoosh, setStartWhoosh] = useState(false);
 
   useEffect(() => {
-    // Longer, smoother progress animation
+    // Faster progress animation (2 seconds shorter)
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
@@ -29,16 +29,16 @@ export function LoadingAnimation({ onComplete }: LoadingAnimationProps) {
           }, 300);
           return 100;
         }
-        // Slower progression for more dramatic effect
+        // Faster progression
         return prev + 1;
       });
-    }, 50);
+    }, 30);
 
-    // Stage transitions - longer intervals
-    const stageTimer1 = setTimeout(() => setStage(1), 1500);
-    const stageTimer2 = setTimeout(() => setStage(2), 3000);
-    const stageTimer3 = setTimeout(() => setStage(3), 4500);
-    const secondaryTimer = setTimeout(() => setShowSecondary(true), 800);
+    // Stage transitions - adjusted for faster timing
+    const stageTimer1 = setTimeout(() => setStage(1), 900);
+    const stageTimer2 = setTimeout(() => setStage(2), 1800);
+    const stageTimer3 = setTimeout(() => setStage(3), 2700);
+    const secondaryTimer = setTimeout(() => setShowSecondary(true), 500);
 
     return () => {
       clearInterval(progressInterval);

@@ -11,7 +11,7 @@ export function CaseStudiesSection() {
 
   const caseStudies = [
     {
-      category: 'Home Services',
+      category: 'Bathroom Remodeling',
       problem: 'Zero online leads, relying only on word-of-mouth referrals',
       before: 'No website traffic, manual follow-ups, missing opportunities',
       metrics: [
@@ -23,40 +23,40 @@ export function CaseStudiesSection() {
       role: 'Bathroom Remodeling Contractor',
     },
     {
-      category: 'Local Business',
-      problem: 'Wasting $3K/month on Facebook ads with no clear ROI',
+      category: 'Hotel Renovation',
+      problem: 'Wasting $4K/month on ads with zero qualified commercial leads',
       before: 'Random targeting, no lead tracking, couldn\'t measure what worked',
       metrics: [
-        { value: '4.2x', label: 'ROAS', subLabel: 'return on ad spend' },
-        { value: '-65%', label: 'Cost Per Lead', subLabel: 'reduction' },
+        { value: '5.8x', label: 'ROAS', subLabel: 'return on ad spend' },
+        { value: '-58%', label: 'Cost Per Lead', subLabel: 'reduction' },
       ],
-      quote: 'The AI showed me exactly which ads worked and who to target. I cut my ad budget in half and tripled my bookings.',
-      author: 'Jennifer Martinez',
-      role: 'Fitness Studio Owner',
+      quote: 'The AI found hotel managers who actually need renovations. We went from 2 projects to 9 in the pipeline.',
+      author: 'James Carter',
+      role: 'Commercial Hotel Remodeler',
     },
     {
-      category: 'Freelance Services',
-      problem: 'Juggling 12 clients with spreadsheets and constant context switching',
-      before: 'Lost leads in email, manual invoicing, no systematic follow-up process',
+      category: 'Kitchen Remodeling',
+      problem: 'Juggling 15 kitchen projects with spreadsheets and missed follow-ups',
+      before: 'Lost leads in email, manual estimates, no systematic follow-up process',
       metrics: [
-        { value: '18hrs', label: 'Time Saved', subLabel: 'weekly' },
-        { value: '+150%', label: 'Client Capacity', subLabel: 'increased' },
+        { value: '22hrs', label: 'Time Saved', subLabel: 'weekly' },
+        { value: '+180%', label: 'Project Capacity', subLabel: 'increased' },
       ],
-      quote: 'I went from barely managing 8 clients to easily handling 20. The automation gave me my evenings back.',
-      author: 'David Thompson',
-      role: 'Real Estate Photographer',
+      quote: 'I went from barely managing 6 kitchens to easily handling 17. The automation gave me my weekends back.',
+      author: 'Tony Morales',
+      role: 'Kitchen Remodeling Specialist',
     },
     {
-      category: 'Professional Services',
-      problem: 'Spending 15 hours/week on admin tasks instead of billable work',
-      before: 'Manual lead qualification, missed follow-ups, no automation',
+      category: 'Basement Finishing',
+      problem: 'Spending 20 hours/week on estimates for leads that never converted',
+      before: 'Manual lead qualification, wasted time on tire-kickers, no automation',
       metrics: [
-        { value: '85%', label: 'Admin Time', subLabel: 'reduced' },
-        { value: '+$5.2K', label: 'Monthly Income', subLabel: 'increase' },
+        { value: '73%', label: 'Lead Quality', subLabel: 'improved' },
+        { value: '+$6.8K', label: 'Monthly Profit', subLabel: 'increase' },
       ],
-      quote: 'The lead scoring is incredibly accurate. I now spend my time on high-value clients instead of tire-kickers.',
-      author: 'Rachel Kim',
-      role: 'Business Attorney',
+      quote: 'The lead scoring saved me from wasting time on bad-fit clients. I only talk to serious homeowners now.',
+      author: 'Steve Anderson',
+      role: 'Basement Finishing Contractor',
     },
   ];
 
