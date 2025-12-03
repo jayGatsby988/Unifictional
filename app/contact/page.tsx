@@ -14,12 +14,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog';
+import { Calendar as CalendarComponent } from '@/components/ui/calendar';
 import { CheckCircle2, Mail, MessageSquare, Calendar, Clock, Video, Zap, TrendingUp, CalendarPlus, Download } from 'lucide-react';
+import { format } from 'date-fns';
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [emailError, setEmailError] = useState('');
+  const [calendarOpen, setCalendarOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+  const [selectedTime, setSelectedTime] = useState<string>('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -71,11 +83,18 @@ export default function ContactPage() {
       if (response.ok) {
         setSubmitted(true);
       } else {
-        alert('Failed to send message. Please try again.');
+        const errorData = await response.json().catch(() => ({}));
+        const errorMessage = errorData.message || 'Failed to send message. Please try again.';
+        
+        if (errorData.code === 'MISSING_CREDENTIALS' || response.status === 503) {
+          alert('Email service is not configured. Your form submission was received but cannot be sent via email. Please contact support directly.');
+        } else {
+          alert(errorMessage);
+        }
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('Failed to send message. Please try again.');
+      alert('Failed to send message. Please check your connection and try again.');
     } finally {
       setLoading(false);
     }
@@ -134,6 +153,38 @@ END:VCALENDAR`;
     };
     const url = `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(event.subject)}&body=${encodeURIComponent(event.body)}&location=${encodeURIComponent(event.location)}&startdt=${event.startdt}&enddt=${event.enddt}`;
     window.open(url, '_blank');
+  };
+
+  // Generate time slots from 9am to 7pm
+  const generateTimeSlots = () => {
+    const slots = [];
+    for (let hour = 9; hour <= 19; hour++) {
+      const time12 = hour > 12 ? `${hour - 12}:00 PM` : hour === 12 ? '12:00 PM' : `${hour}:00 AM`;
+      const time24 = `${hour.toString().padStart(2, '0')}:00`;
+      slots.push({ label: time12, value: time24 });
+    }
+    return slots;
+  };
+
+  const timeSlots = generateTimeSlots();
+
+  const handleDateSelect = (date: Date | undefined) => {
+    setSelectedDate(date);
+    setSelectedTime(''); // Reset time when date changes
+  };
+
+  const handleTimeSelect = (time: string) => {
+    setSelectedTime(time);
+  };
+
+  const handleConfirmBooking = () => {
+    if (selectedDate && selectedTime) {
+      const dateStr = format(selectedDate, 'MMM dd, yyyy');
+      const timeStr = timeSlots.find(slot => slot.value === selectedTime)?.label || selectedTime;
+      const fullDateTime = `${dateStr} at ${timeStr}`;
+      setFormData({ ...formData, preferredTime: fullDateTime });
+      setCalendarOpen(false);
+    }
   };
 
   const benefits = [
@@ -321,23 +372,137 @@ END:VCALENDAR`;
 
                     <div>
                       <Label htmlFor="preferred-time">Preferred Meeting Time</Label>
-                      <Select value={formData.preferredTime} onValueChange={(value) => setFormData({ ...formData, preferredTime: value })}>
-                        <SelectTrigger className="mt-2">
-                          <SelectValue placeholder="Select your preferred time" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="morning-9am">9:00 AM - 10:00 AM</SelectItem>
-                          <SelectItem value="morning-10am">10:00 AM - 11:00 AM</SelectItem>
-                          <SelectItem value="morning-11am">11:00 AM - 12:00 PM</SelectItem>
-                          <SelectItem value="afternoon-12pm">12:00 PM - 1:00 PM</SelectItem>
-                          <SelectItem value="afternoon-1pm">1:00 PM - 2:00 PM</SelectItem>
-                          <SelectItem value="afternoon-2pm">2:00 PM - 3:00 PM</SelectItem>
-                          <SelectItem value="afternoon-3pm">3:00 PM - 4:00 PM</SelectItem>
-                          <SelectItem value="afternoon-4pm">4:00 PM - 5:00 PM</SelectItem>
-                          <SelectItem value="flexible">Flexible - Any time works</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <div className="mt-2">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => setCalendarOpen(true)}
+                          className="w-full justify-start text-left font-normal border-2 border-gray-200 hover:border-gold hover:bg-gold-50"
+                        >
+                          <Calendar className="mr-2 h-4 w-4 text-gold" />
+                          {formData.preferredTime ? (
+                            <span className="text-[#111827]">{formData.preferredTime}</span>
+                          ) : (
+                            <span className="text-[#6B7280]">Book time</span>
+                          )}
+                        </Button>
+                      </div>
                     </div>
+
+                    <Dialog open={calendarOpen} onOpenChange={setCalendarOpen}>
+                      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-white border-2 border-gray-200">
+                        <DialogHeader>
+                          <DialogTitle className="text-2xl font-bold text-[#111827]">
+                            Select Your Preferred Date & Time
+                          </DialogTitle>
+                          <DialogDescription className="text-[#6B7280]">
+                            Choose a date and time that works best for your demo call
+                          </DialogDescription>
+                        </DialogHeader>
+                        
+                        <div className="space-y-6 py-4">
+                          {/* Calendar Section */}
+                          <div>
+                            <h3 className="text-lg font-semibold text-[#111827] mb-4">Select Date</h3>
+                            <div className="flex justify-center">
+                              <CalendarComponent
+                                mode="single"
+                                selected={selectedDate}
+                                onSelect={handleDateSelect}
+                                disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+                                className="rounded-lg border border-gray-200 p-4"
+                                classNames={{
+                                  months: 'flex flex-col space-y-4',
+                                  month: 'space-y-4',
+                                  caption: 'flex justify-center pt-1 relative items-center mb-4',
+                                  caption_label: 'text-lg font-semibold text-[#111827]',
+                                  nav: 'space-x-1 flex items-center',
+                                  nav_button: 'h-8 w-8 bg-transparent p-0 opacity-50 hover:opacity-100 hover:bg-gold-50 rounded-md border border-gray-200',
+                                  nav_button_previous: 'absolute left-1',
+                                  nav_button_next: 'absolute right-1',
+                                  table: 'w-full border-collapse space-y-1',
+                                  head_row: 'flex',
+                                  head_cell: 'text-[#6B7280] rounded-md w-10 font-normal text-sm',
+                                  row: 'flex w-full mt-2',
+                                  cell: 'h-10 w-10 text-center text-sm p-0 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20',
+                                  day: 'h-10 w-10 p-0 font-normal aria-selected:opacity-100 rounded-md hover:bg-gold-50 hover:text-gold transition-colors',
+                                  day_selected: 'bg-gradient-to-r from-gold to-blue text-white hover:bg-gradient-to-r hover:from-gold hover:to-blue hover:text-white focus:bg-gradient-to-r focus:from-gold focus:to-blue focus:text-white',
+                                  day_today: 'bg-blue-50 text-blue font-semibold',
+                                  day_outside: 'text-[#6B7280] opacity-50',
+                                  day_disabled: 'text-[#6B7280] opacity-30',
+                                  day_range_middle: 'aria-selected:bg-gold-50 aria-selected:text-gold',
+                                  day_hidden: 'invisible',
+                                }}
+                              />
+                            </div>
+                          </div>
+
+                          {/* Time Selection Section */}
+                          {selectedDate && (
+                            <motion.div
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.3 }}
+                            >
+                              <h3 className="text-lg font-semibold text-[#111827] mb-4">
+                                Select Time (EST)
+                              </h3>
+                              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2 max-h-64 overflow-y-auto p-2">
+                                {timeSlots.map((slot) => (
+                                  <button
+                                    key={slot.value}
+                                    type="button"
+                                    onClick={() => handleTimeSelect(slot.value)}
+                                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                                      selectedTime === slot.value
+                                        ? 'bg-gradient-to-r from-gold to-blue text-white shadow-md scale-105'
+                                        : 'bg-gray-50 text-[#111827] hover:bg-gold-50 hover:text-gold border border-gray-200 hover:border-gold'
+                                    }`}
+                                  >
+                                    {slot.label}
+                                  </button>
+                                ))}
+                              </div>
+                            </motion.div>
+                          )}
+
+                          {/* Selected Info */}
+                          {selectedDate && selectedTime && (
+                            <motion.div
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.3 }}
+                              className="p-4 bg-gradient-to-r from-gold-50 to-blue-50 rounded-lg border-2 border-gold-200"
+                            >
+                              <p className="text-sm text-[#111827] font-medium">
+                                <Clock className="inline h-4 w-4 mr-2 text-gold" />
+                                Selected: {format(selectedDate, 'EEEE, MMMM dd, yyyy')} at{' '}
+                                {timeSlots.find(slot => slot.value === selectedTime)?.label}
+                              </p>
+                            </motion.div>
+                          )}
+                        </div>
+
+                        <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+                          <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => setCalendarOpen(false)}
+                            className="border-gray-200 hover:bg-gray-50"
+                          >
+                            Cancel
+                          </Button>
+                          <Button
+                            type="button"
+                            onClick={handleConfirmBooking}
+                            disabled={!selectedDate || !selectedTime}
+                            className="bg-gradient-to-r from-gold to-blue hover:opacity-90 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
+                            Confirm Booking
+                          </Button>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
 
                     <div>
                       <Label htmlFor="message">Message (Optional)</Label>

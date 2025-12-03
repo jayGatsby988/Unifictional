@@ -11,6 +11,11 @@ export async function POST(request: Request) {
 
     // Format preferred time for display
     const formatPreferredTime = (time: string) => {
+      // If it's already formatted (from calendar), return as-is
+      if (time.includes('at') || time.includes('AM') || time.includes('PM')) {
+        return time;
+      }
+      // Otherwise, check old format mapping
       const timeMap: { [key: string]: string } = {
         'morning-9am': '9:00 AM - 10:00 AM',
         'morning-10am': '10:00 AM - 11:00 AM',
@@ -25,22 +30,49 @@ export async function POST(request: Request) {
       return timeMap[time] || time;
     };
 
-    // Debug: Check environment variables
-    console.log('Gmail User:', process.env.GMAIL_USER);
-    console.log('Gmail Password set:', !!process.env.GMAIL_APP_PASSWORD);
+    // Check if Gmail credentials are configured
+    const gmailUser = process.env.GMAIL_USER;
+    const gmailPassword = process.env.GMAIL_APP_PASSWORD;
+
+    if (!gmailUser || !gmailPassword) {
+      console.error('Gmail credentials not configured');
+      console.error('Gmail User:', gmailUser ? 'Set' : 'Missing');
+      console.error('Gmail Password:', gmailPassword ? 'Set' : 'Missing');
+      
+      // Still log the form submission for debugging
+      console.log('Form submission received:', {
+        name,
+        email,
+        company,
+        phone,
+        size,
+        useCase,
+        preferredTime,
+        message,
+      });
+
+      return NextResponse.json(
+        { 
+          message: 'Email service not configured. Please set GMAIL_USER and GMAIL_APP_PASSWORD environment variables.',
+          error: 'Missing email credentials',
+          code: 'MISSING_CREDENTIALS'
+        },
+        { status: 503 }
+      );
+    }
     
     // Create transporter
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD,
+        user: gmailUser,
+        pass: gmailPassword,
       },
     });
 
     // Email content
     const mailOptions = {
-      from: process.env.GMAIL_USER,
+      from: gmailUser,
       to: 'Unifictional@gmail.com',
       subject: `🚀 New Demo Booking Request from ${name}`,
       html: `
