@@ -27,6 +27,7 @@ export default function ContactPage() {
     phone: '',
     size: '',
     useCase: '',
+    preferredTime: '',
     message: '',
   });
 
@@ -306,11 +307,34 @@ END:VCALENDAR`;
                           <SelectValue placeholder="Select your primary goal" />
                         </SelectTrigger>
                         <SelectContent>
+                          <SelectItem value="ai-website">AI Website</SelectItem>
+                          <SelectItem value="marketing">Marketing</SelectItem>
+                          <SelectItem value="lead-generation">Lead Generation / Lead Management</SelectItem>
                           <SelectItem value="leads">Better lead management</SelectItem>
                           <SelectItem value="ads">AI ad creation</SelectItem>
                           <SelectItem value="all">Complete growth platform</SelectItem>
                           <SelectItem value="agency">Agency operations</SelectItem>
                           <SelectItem value="other">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="preferred-time">Preferred Meeting Time</Label>
+                      <Select value={formData.preferredTime} onValueChange={(value) => setFormData({ ...formData, preferredTime: value })}>
+                        <SelectTrigger className="mt-2">
+                          <SelectValue placeholder="Select your preferred time" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="morning-9am">9:00 AM - 10:00 AM</SelectItem>
+                          <SelectItem value="morning-10am">10:00 AM - 11:00 AM</SelectItem>
+                          <SelectItem value="morning-11am">11:00 AM - 12:00 PM</SelectItem>
+                          <SelectItem value="afternoon-12pm">12:00 PM - 1:00 PM</SelectItem>
+                          <SelectItem value="afternoon-1pm">1:00 PM - 2:00 PM</SelectItem>
+                          <SelectItem value="afternoon-2pm">2:00 PM - 3:00 PM</SelectItem>
+                          <SelectItem value="afternoon-3pm">3:00 PM - 4:00 PM</SelectItem>
+                          <SelectItem value="afternoon-4pm">4:00 PM - 5:00 PM</SelectItem>
+                          <SelectItem value="flexible">Flexible - Any time works</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>

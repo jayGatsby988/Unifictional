@@ -7,7 +7,23 @@ export const runtime = 'nodejs';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, company, message, phone, size, useCase } = body;
+    const { name, email, company, message, phone, size, useCase, preferredTime } = body;
+
+    // Format preferred time for display
+    const formatPreferredTime = (time: string) => {
+      const timeMap: { [key: string]: string } = {
+        'morning-9am': '9:00 AM - 10:00 AM',
+        'morning-10am': '10:00 AM - 11:00 AM',
+        'morning-11am': '11:00 AM - 12:00 PM',
+        'afternoon-12pm': '12:00 PM - 1:00 PM',
+        'afternoon-1pm': '1:00 PM - 2:00 PM',
+        'afternoon-2pm': '2:00 PM - 3:00 PM',
+        'afternoon-3pm': '3:00 PM - 4:00 PM',
+        'afternoon-4pm': '4:00 PM - 5:00 PM',
+        'flexible': 'Flexible - Any time works',
+      };
+      return timeMap[time] || time;
+    };
 
     // Debug: Check environment variables
     console.log('Gmail User:', process.env.GMAIL_USER);
@@ -43,6 +59,7 @@ export async function POST(request: Request) {
               ${phone ? `<p style="margin: 10px 0;"><strong style="color: #1F4F9A;">📱 Phone:</strong> ${phone}</p>` : ''}
               ${size ? `<p style="margin: 10px 0;"><strong style="color: #1F4F9A;">👥 Company Size:</strong> ${size}</p>` : ''}
               ${useCase ? `<p style="margin: 10px 0;"><strong style="color: #1F4F9A;">🎯 Use Case:</strong> ${useCase}</p>` : ''}
+              ${preferredTime ? `<p style="margin: 10px 0;"><strong style="color: #1F4F9A;">⏰ Preferred Meeting Time:</strong> ${formatPreferredTime(preferredTime)}</p>` : ''}
             </div>
             
             <div style="margin-top: 25px; padding: 20px; background-color: #f3f4f6; border-radius: 8px; border-left: 4px solid #F6B800;">
