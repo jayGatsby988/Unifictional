@@ -2,12 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +26,13 @@ export function Navbar() {
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
   ];
+
+  const isActive = (href: string) => {
+    if (href === '/') {
+      return pathname === '/';
+    }
+    return pathname.startsWith(href);
+  };
 
   return (
     <nav
@@ -46,9 +55,16 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-[#111827] hover:text-blue transition-colors duration-200 font-medium"
+                className={`group text-[#111827] hover:text-blue font-medium relative pb-1 transition-colors duration-300 ease-in-out ${
+                  isActive(link.href) ? 'text-blue' : ''
+                }`}
               >
-                {link.label}
+                <span className="relative z-10">{link.label}</span>
+                <span
+                  className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-gold to-blue transition-all duration-500 ease-in-out ${
+                    isActive(link.href) ? 'w-full opacity-100' : 'w-0 opacity-0 group-hover:w-full group-hover:opacity-60'
+                  }`}
+                ></span>
               </Link>
             ))}
           </div>
@@ -80,7 +96,11 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="block text-[#111827] hover:text-blue hover:bg-gray-50 transition-all duration-200 font-medium py-3 px-4 rounded-lg"
+                className={`block hover:text-blue hover:bg-gray-50 transition-all duration-300 ease-in-out font-medium py-3 px-4 rounded-lg relative ${
+                  isActive(link.href) 
+                    ? 'text-blue bg-blue-50 border-l-4 border-gold shadow-sm' 
+                    : 'text-[#111827] border-l-4 border-transparent'
+                }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.label}
