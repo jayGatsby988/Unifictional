@@ -10,7 +10,12 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Unifictional - Unified AI for leads, ads, and growth',
-  description: 'Unifictional is an AI growth platform for agencies, freelancers, and brands. Centralize lead management, ad generation, and campaign intelligence in one clean, powerful dashboard.',
+  description: 'Unifictional is an AI growth platform for agencies, freelancers, and brands. Centralize lead management, ad generation, and campaign intelligence in one clean, powerful dashboard',
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({

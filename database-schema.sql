@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS finance_items (
   cost DECIMAL(10, 2) NOT NULL,
   description TEXT,
   frequency TEXT NOT NULL CHECK (frequency IN ('one-time', 'monthly', 'yearly')),
+  type TEXT NOT NULL DEFAULT 'expense' CHECK (type IN ('expense', 'income')),
   next_renewal_date TIMESTAMPTZ,
   is_active BOOLEAN DEFAULT true,
   created_at TIMESTAMPTZ DEFAULT NOW(),
@@ -22,6 +23,9 @@ CREATE INDEX IF NOT EXISTS idx_finance_items_renewal_date ON finance_items(next_
 
 -- Create an index on is_active for filtering active items
 CREATE INDEX IF NOT EXISTS idx_finance_items_is_active ON finance_items(is_active);
+
+-- Create an index on type for filtering income/expenses
+CREATE INDEX IF NOT EXISTS idx_finance_items_type ON finance_items(type);
 
 -- Enable Row Level Security (RLS)
 ALTER TABLE finance_items ENABLE ROW LEVEL SECURITY;
