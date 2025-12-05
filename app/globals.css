@@ -36,8 +36,54 @@
   * {
     @apply border-border;
   }
+  html, body {
+    height: auto;
+    min-height: 100%;
+  }
   body {
     @apply bg-[#F9FAFB] text-[#111827] font-sans antialiased;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    position: relative;
+  }
+  html {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+  /* Prevent flash of content before loading - only on home page */
+  html.loading body {
+    overflow: hidden;
+  }
+  /* Ensure body can scroll when not loading */
+  html:not(.loading) body,
+  html.loaded body {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+  /* Ensure main content can scroll */
+  main {
+    overflow: visible !important;
+    min-height: auto;
+  }
+  /* Hide navbar and footer during loading */
+  html.loading nav,
+  html.loading footer {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  /* Hide content sections but keep loading screen visible */
+  /* Loading screen uses fixed positioning so it's not affected by main hiding */
+  html.loading main [data-content-section] {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  html.loaded nav,
+  html.loaded footer {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
   }
 }
 

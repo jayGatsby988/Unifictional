@@ -26,23 +26,26 @@ export default function Home() {
       setIsLoading(false);
       setShowContent(true);
       setContentReady(true);
+      document.documentElement.classList.remove('loading');
+      document.documentElement.classList.add('loaded');
       return;
     }
 
-    // Wait for page to be fully loaded
+    // Set content ready immediately for first-time visitors
+    setContentReady(true);
+    
+    // Also listen for window load as backup
     if (document.readyState === 'complete') {
       setContentReady(true);
     } else {
-      window.addEventListener('load', () => {
+      const handleLoad = () => {
         setContentReady(true);
-      });
+      };
+      window.addEventListener('load', handleLoad);
+      return () => {
+        window.removeEventListener('load', handleLoad);
+      };
     }
-
-    return () => {
-      window.removeEventListener('load', () => {
-        setContentReady(true);
-      });
-    };
   }, []);
 
   const handleLoadingComplete = () => {
@@ -65,24 +68,39 @@ export default function Home() {
     }
   };
 
+  useEffect(() => {
+    // Remove loading class and add loaded class when content is shown
+    if (showContent) {
+      document.documentElement.classList.remove('loading');
+      document.documentElement.classList.add('loaded');
+    } else {
+      document.documentElement.classList.add('loading');
+      document.documentElement.classList.remove('loaded');
+    }
+  }, [showContent]);
+
   return (
     <>
       <AnimatePresence mode="wait">
         {isLoading && (
-          <LoadingAnimation key="loading" onComplete={handleLoadingComplete} />
+          <div data-loading-screen>
+            <LoadingAnimation key="loading" onComplete={handleLoadingComplete} />
+          </div>
         )}
       </AnimatePresence>
 
       <AnimatePresence>
         {showContent && (
           <motion.div
-            initial={{ opacity: 0, scale: 1.02 }}
-            animate={{ opacity: 1, scale: 1 }}
+            key="content"
+            data-content-section
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ 
-              duration: 1.2, 
-              ease: [0.16, 1, 0.3, 1],
-              delay: 0.1 // Small delay ensures content is mounted
+              duration: 0.8, 
+              ease: [0.16, 1, 0.3, 1]
             }}
+            className="relative z-0"
           >
             <HeroSection />
             <ProblemSolutionSection />
