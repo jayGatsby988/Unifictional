@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { PreventFlash } from '@/components/PreventFlash';
+import { ScrollProgressBar } from '@/components/ScrollProgressBar';
 import { Toaster } from '@/components/ui/sonner';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -40,6 +41,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className} suppressHydrationWarning>
         <PreventFlash />
+        <ScrollProgressBar />
         <Navbar />
         <main>{children}</main>
         <Footer />
