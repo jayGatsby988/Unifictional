@@ -205,9 +205,65 @@ a, button, input, select, textarea, [data-link], [data-cursor] { cursor: none; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.75rem 3rem;
-  mix-blend-mode: difference;
+  padding: 1.5rem 2.5rem;
   color: var(--ink-warm);
+}
+
+/* Floating Dune-style centre pill */
+.nav-pill {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  background: rgba(15, 15, 18, 0.55);
+  backdrop-filter: blur(20px) saturate(120%);
+  -webkit-backdrop-filter: blur(20px) saturate(120%);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 0.65rem 1.6rem;
+}
+.nav-pill a {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-warm);
+  text-decoration: none;
+  font-weight: 400;
+  padding: 0.25rem 0;
+  position: relative;
+  transition: color 0.5s var(--ease-luxe);
+}
+.nav-pill a:hover { color: var(--gold); }
+.nav-pill a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px; left: 0;
+  height: 1px;
+  width: 100%;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.6s var(--ease-luxe);
+}
+.nav-pill a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+.nav-pill-mark {
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0.35rem;
+  flex-shrink: 0;
+}
+.nav-pill-mark svg { animation: spin 28s linear infinite; }
+
+@media (max-width: 960px) {
+  .nav-pill { display: none; }
 }
 .nav-logo {
   display: flex;
@@ -225,9 +281,8 @@ a, button, input, select, textarea, [data-link], [data-cursor] { cursor: none; }
   color: inherit;
 }
 .nav-links {
-  list-style: none;
-  display: flex;
-  gap: 3rem;
+  /* Replaced by .nav-pill — kept for backwards compat */
+  display: none;
 }
 .nav-links a {
   color: var(--ink-warm);
@@ -307,6 +362,8 @@ a, button, input, select, textarea, [data-link], [data-cursor] { cursor: none; }
 .hero-content {
   max-width: 1320px;
   width: 100%;
+  position: relative;
+  z-index: 4;
 }
 .hero-eyebrow {
   display: inline-flex;
@@ -451,6 +508,59 @@ a, button, input, select, textarea, [data-link], [data-cursor] { cursor: none; }
   font-size: 0.65rem;
   letter-spacing: 0.32em;
   color: var(--ink-faint);
+  z-index: 5;
+}
+
+/* Vertical text running up the right edge */
+.hero-side-text {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translate(50%, -50%) rotate(90deg);
+  transform-origin: center center;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.42em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0.55;
+}
+
+/* Giant bottom-bleeding watermark word — Dune-style "DESERT" treatment */
+.hero-bottom-word {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.12em;
+  text-align: center;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+  user-select: none;
+}
+.hero-bottom-word span {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 22vw, 22rem);
+  font-weight: 200;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(237, 229, 208, 0.075);
+  display: block;
+  line-height: 0.82;
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .hero-side-text { display: none; }
+  .hero-bottom-word { bottom: -0.08em; }
+  .hero-bottom-word span {
+    font-size: clamp(2.5rem, 26vw, 8rem);
+    color: rgba(237, 229, 208, 0.06);
+  }
 }
 .scroll-line {
   width: 1px;

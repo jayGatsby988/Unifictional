@@ -58,12 +58,22 @@
     </svg>
     <span>UNIFICTIONAL</span>
   </a>
-  <ul class="nav-links">
-    <li><a href="#platform" data-link>Platform</a></li>
-    <li><a href="#pricing" data-link>Pricing</a></li>
-    <li><a href="#trust" data-link>Trust</a></li>
-    <li><a href="#contact" data-link>Contact</a></li>
-  </ul>
+
+  <!-- Floating pill in the centre — Dune-style nav -->
+  <div class="nav-pill">
+    <a href="#platform" data-link>Platform</a>
+    <a href="#pricing" data-link>Pricing</a>
+    <span class="nav-pill-mark" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <circle cx="11" cy="11" r="10" stroke="currentColor" stroke-width="0.7" opacity="0.55"/>
+        <circle cx="11" cy="11" r="5" stroke="currentColor" stroke-width="0.7"/>
+        <circle cx="11" cy="11" r="2" fill="currentColor"/>
+      </svg>
+    </span>
+    <a href="#trust" data-link>Trust</a>
+    <a href="#contact" data-link>Contact</a>
+  </div>
+
   <a href="#pricing" class="nav-cta" data-link>
     <span>See pricing</span>
     <span class="cta-dot"></span>
@@ -110,6 +120,16 @@
   <div class="hero-scroll">
     <span>SCROLL</span>
     <div class="scroll-line"></div>
+  </div>
+
+  <!-- Vertical side text (right edge) — Dune-style detail -->
+  <aside class="hero-side-text" aria-hidden="true">
+    <span>EST · MMXXVI ·  UNIFIED INTELLIGENCE  · LEADS · ADS · GROWTH</span>
+  </aside>
+
+  <!-- Giant watermark word that bleeds across the bottom -->
+  <div class="hero-bottom-word" aria-hidden="true">
+    <span>UNIFIED</span>
   </div>
 </section>
 
