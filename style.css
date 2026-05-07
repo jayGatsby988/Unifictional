@@ -1308,3 +1308,125 @@ section {
     transition-duration: 0.001s !important;
   }
 }
+
+/* ============================================
+   Touch devices — restore native cursor
+   ============================================ */
+@media (hover: none), (pointer: coarse) {
+  html, body, a, button, input, select, textarea,
+  [data-link], [data-cursor] { cursor: auto !important; }
+  .cursor, .cursor-dot { display: none !important; }
+}
+
+/* ============================================
+   Tablets & small laptops
+   ============================================ */
+@media (max-width: 900px) {
+  .nav { padding: 1rem 1.25rem; }
+  .nav-links { display: none; }
+  .nav-cta { padding: 0.55rem 0.95rem; font-size: 0.65rem; letter-spacing: 0.16em; }
+
+  .hero { padding: 6rem 1.5rem 3rem; }
+  .hero-title { font-size: clamp(2.2rem, 9vw, 3.6rem); margin-bottom: 1.5rem; }
+  .hero-sub { font-size: 0.95rem; margin-bottom: 2rem; max-width: 38ch; }
+  .hero-actions { gap: 0.75rem; }
+  .btn { padding: 0.95rem 1.5rem; font-size: 0.7rem; }
+  .hero-trust { font-size: 0.6rem; letter-spacing: 0.18em; gap: 0.6rem; flex-wrap: wrap; }
+  .hero-scroll { display: none; }
+
+  .marquee { padding: 1.25rem 0; }
+  .marquee-track { gap: 2rem; padding-left: 2rem; }
+  .marquee-track span { font-size: clamp(1rem, 3vw, 1.3rem); }
+
+  .section-head { padding: 4rem 1.5rem 2rem; }
+  .section-title { font-size: clamp(1.6rem, 7vw, 2.4rem); max-width: 22ch; }
+  .section-sub { font-size: 0.92rem; }
+
+  .platform-card { padding: 2.25rem 1.5rem; min-height: auto; }
+  .platform-card h3 { font-size: 1.25rem; }
+
+  .tiers { padding: 0 1.25rem; gap: 1.25rem; }
+  .tier { padding: 1.5rem 1.5rem 1.5rem; }
+  .tier-featured { transform: none; }
+  .tier-featured:hover { transform: translateY(-4px); }
+  .tier h3 { font-size: 1.2rem; }
+  .price-num { font-size: 1.85rem; }
+
+  .testimonial { padding: 4rem 1.5rem; }
+  .testimonial p { font-size: clamp(1.2rem, 5vw, 1.8rem); }
+
+  .contact { padding: 4rem 1.5rem; }
+  .contact-title { font-size: clamp(1.7rem, 7vw, 2.6rem); }
+  .contact-sub { font-size: 0.95rem; margin-bottom: 2rem; }
+
+  .footer { padding: 3rem 1.5rem 1.75rem; }
+  .footer-row { gap: 2.5rem; padding-bottom: 2.5rem; }
+  .footer-bottom { font-size: 0.6rem; letter-spacing: 0.15em; }
+}
+
+/* ============================================
+   Phones — disable 3D effects and heavy visuals
+   ============================================ */
+@media (max-width: 700px) {
+  /* Showcase: drop perspective, single column, no overflow */
+  .showcase {
+    min-height: auto;
+    padding: 4rem 0;
+    overflow: hidden;
+  }
+  .showcase-perspective {
+    width: 100%;
+    padding: 0 1rem;
+    perspective: none;
+  }
+  .showcase-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    transform: none !important;
+  }
+  .site-card,
+  .site-card:hover {
+    transform: none !important;
+    opacity: 1;
+    filter: none;
+    box-shadow: 0 8px 20px -14px rgba(0, 0, 0, 0.7);
+  }
+  .site-card img { aspect-ratio: 16 / 11; }
+  .site-name { font-size: 0.55rem; padding: 0.4rem 0.5rem; padding-top: 1.2rem; }
+  .site-frame { padding: 0.35rem 0.55rem; }
+  .site-frame span { font-size: 0.5rem; }
+
+  /* Centre overlay becomes a normal heading on mobile */
+  .showcase-center {
+    position: static;
+    padding: 2rem 1rem 2.5rem;
+    text-align: center;
+  }
+  .showcase-center::before { display: none; }
+  .showcase-title { font-size: clamp(1.6rem, 7vw, 2.4rem); }
+  .showcase-sub { font-size: 0.9rem; }
+}
+
+/* ============================================
+   iPhones / very small phones
+   ============================================ */
+@media (max-width: 420px) {
+  .hero { padding: 5.5rem 1rem 2.5rem; }
+  .hero-title { font-size: 2rem; }
+  .hero-sub { font-size: 0.9rem; }
+  .nav { padding: 0.85rem 1rem; }
+  .nav-logo span { display: none; }
+  .nav-cta { padding: 0.5rem 0.8rem; font-size: 0.6rem; }
+  .section-head { padding: 3rem 1rem 1.5rem; }
+  .section-title { font-size: 1.55rem; }
+  .platform-card { padding: 2rem 1.25rem; }
+  .tiers { padding: 0 1rem; }
+  .tier { padding: 1.25rem; }
+  .testimonial { padding: 3.5rem 1rem; }
+  .testimonial p { font-size: 1.2rem; }
+  .contact { padding: 3.5rem 1rem; }
+  .contact-title { font-size: 1.7rem; }
+  .footer { padding: 2.5rem 1rem 1.5rem; }
+  .footer-cols { grid-template-columns: 1fr; gap: 1.5rem; }
+  .footer-bottom { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+}

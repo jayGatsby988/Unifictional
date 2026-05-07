@@ -8,6 +8,12 @@
 // =====================================================
 import * as THREE from 'three';
 
+// Device detection — mobile/touch gets a lighter scene + skips cursor & tilt
+const IS_TOUCH = window.matchMedia('(hover: none)').matches ||
+                 window.matchMedia('(pointer: coarse)').matches;
+const IS_SMALL = window.matchMedia('(max-width: 900px)').matches;
+const MOBILE_LIKE = IS_TOUCH || IS_SMALL;
+
 // =========================================
 // LOADER
 // =========================================
@@ -55,14 +61,16 @@ function tickCursor() {
 }
 requestAnimationFrame(tickCursor);
 
-document.querySelectorAll('a, button, [data-link]').forEach(el => {
-  el.addEventListener('mouseenter', () => cursor.classList.add('is-link'));
-  el.addEventListener('mouseleave', () => cursor.classList.remove('is-link'));
-});
-document.querySelectorAll('input, textarea, select').forEach(el => {
-  el.addEventListener('mouseenter', () => cursor.classList.add('is-text'));
-  el.addEventListener('mouseleave', () => cursor.classList.remove('is-text'));
-});
+if (!MOBILE_LIKE) {
+  document.querySelectorAll('a, button, [data-link]').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('is-link'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('is-link'));
+  });
+  document.querySelectorAll('input, textarea, select').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('is-text'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('is-text'));
+  });
+}
 
 document.querySelectorAll('.platform-card').forEach(card => {
   card.addEventListener('mousemove', e => {
@@ -72,11 +80,12 @@ document.querySelectorAll('.platform-card').forEach(card => {
   });
 });
 
-// Showcase grid tilt — lerps toward mouse position for a 3D-tunnel feel
+// Showcase grid tilt — lerps toward mouse position for a 3D-tunnel feel.
+// Skipped on mobile (no mouse + the CSS already disables the perspective).
 const showcaseGrid = document.querySelector('.showcase-grid');
 const showcaseTilt = { x: 0, y: 0 };
 function tickShowcase() {
-  if (showcaseGrid) {
+  if (showcaseGrid && !MOBILE_LIKE) {
     showcaseTilt.x += (mouseN.x * 7 - showcaseTilt.x) * 0.05;
     showcaseTilt.y += (-mouseN.y * 5 - showcaseTilt.y) * 0.05;
     showcaseGrid.style.transform =
@@ -84,7 +93,7 @@ function tickShowcase() {
   }
   requestAnimationFrame(tickShowcase);
 }
-requestAnimationFrame(tickShowcase);
+if (!MOBILE_LIKE) requestAnimationFrame(tickShowcase);
 
 // =========================================
 // MAIN BG SCENE — MORPHING PARTICLE SYSTEM
@@ -93,7 +102,7 @@ const canvas = document.getElementById('bg-canvas');
 const renderer = new THREE.WebGLRenderer({
   canvas, antialias: true, alpha: true, powerPreference: 'high-performance',
 });
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, MOBILE_LIKE ? 1.5 : 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setClearColor(0x000000, 0);
 
@@ -102,7 +111,8 @@ const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerH
 camera.position.set(0, 0, 7.5);
 
 // ---------- PARTICLE SHAPE GENERATORS ----------
-const N = 200000;
+// Phones get a much lighter system — 200k grains tank battery and frame rate.
+const N = MOBILE_LIKE ? 28000 : 200000;
 
 const shape0 = new Float32Array(N * 3);  // SPHERE      (hero)
 const shape1 = new Float32Array(N * 3);  // TORUS       (platform)
@@ -871,7 +881,10 @@ function animate() {
   // Centered for the whole page — house scene sits in the middle for the hero,
   // and the later shapes (torus, 3 spheres, cube, galaxy) stay centered too.
   const targetY = -0.3;  // slight downshift so the house+trees feel anchored, not floating
-  morphPoints.position.x += (0.6 - morphPoints.position.x) * 0.06;
+  // On mobile / portrait viewports the scene needs to be centred so the
+  // house/trees aren't pushed off-screen by the right-of-centre offset.
+  const targetX = MOBILE_LIKE ? 0 : 0.6;
+  morphPoints.position.x += (targetX - morphPoints.position.x) * 0.06;
   morphPoints.position.y += (targetY - morphPoints.position.y) * 0.06;
 
   renderer.render(scene, camera);
