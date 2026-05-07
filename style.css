@@ -88,6 +88,25 @@ a, button, input, select, textarea, [data-link], [data-cursor] { cursor: none; }
 }
 
 /* ============================================
+   Cinematic outer frame — rounded "window"
+   ============================================ */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 7px;
+  pointer-events: none;
+  z-index: 9990;
+  border-radius: 16px;
+  box-shadow: 0 0 0 100vmax #000;
+}
+@media (max-width: 700px) {
+  body::before {
+    inset: 5px;
+    border-radius: 12px;
+  }
+}
+
+/* ============================================
    Cursor
    ============================================ */
 .cursor {
@@ -405,12 +424,11 @@ a, button, input, select, textarea, [data-link], [data-cursor] { cursor: none; }
 .hero-title .italic {
   font-style: italic;
   font-weight: 300;
-  background: linear-gradient(110deg, var(--gold-deep) 0%, var(--gold-bright) 45%, var(--gold) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  background-size: 220% 100%;
-  animation: shimmer 9s ease-in-out infinite;
+  color: var(--gold-bright);   /* single warm tone — no shimmer */
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  animation: none;
 }
 .hero-title .ampersand {
   font-style: italic;
@@ -514,12 +532,12 @@ a, button, input, select, textarea, [data-link], [data-cursor] { cursor: none; }
 /* Vertical text running up the right edge */
 .hero-side-text {
   position: absolute;
-  right: 0.75rem;
+  right: 1.75rem;
   top: 50%;
   transform: translate(50%, -50%) rotate(90deg);
   transform-origin: center center;
   font-family: var(--mono);
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   letter-spacing: 0.42em;
   color: var(--ink-faint);
   text-transform: uppercase;
@@ -544,11 +562,11 @@ a, button, input, select, textarea, [data-link], [data-cursor] { cursor: none; }
 .hero-bottom-word span {
   font-family: var(--serif);
   font-size: clamp(2.4rem, 13.5vw, 14rem);
-  font-weight: 200;
-  font-variation-settings: "opsz" 144, "SOFT" 100;
-  letter-spacing: 0.04em;
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: rgba(237, 229, 208, 0.075);
+  color: rgba(237, 229, 208, 0.11);
   display: block;
   line-height: 0.82;
   white-space: nowrap;
