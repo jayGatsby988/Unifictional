@@ -111,8 +111,7 @@ const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerH
 camera.position.set(0, 0, 7.5);
 
 // ---------- PARTICLE SHAPE GENERATORS ----------
-// Phones get a much lighter system — 200k grains tank battery and frame rate.
-const N = MOBILE_LIKE ? 28000 : 200000;
+const N = 30000;
 
 const shape0 = new Float32Array(N * 3);  // SPHERE      (hero)
 const shape1 = new Float32Array(N * 3);  // TORUS       (platform)
