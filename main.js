@@ -463,8 +463,8 @@ const morphVert = /* glsl */`
     vec4 mv = modelViewMatrix * vec4(pos, 1.0);
     gl_Position = projectionMatrix * mv;
 
-    // Uniform 2-pixel dots regardless of depth.
-    gl_PointSize = 2.0 * uPixelRatio;
+    // Uniform 3-pixel dots regardless of depth.
+    gl_PointSize = 3.0 * uPixelRatio;
 
     // Alpha falloff for distance from origin
     float dist = length(pos);
