@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Unifictional — unified AI for leads, ads, and growth.">
+<title>Unifictional · Unified AI for leads, ads &amp; growth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,200..700,0..100&family=Inter:wght@200..600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursor-dot"></div>
+
+<!-- Loading screen -->
+<div class="loader" id="loader">
+  <div class="loader-inner">
+    <div class="loader-mark">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="0.75" opacity="0.4"/>
+        <circle cx="24" cy="24" r="14" stroke="currentColor" stroke-width="0.75"/>
+        <circle cx="24" cy="24" r="4" fill="currentColor"/>
+      </svg>
+    </div>
+    <div class="loader-text">UNIFICTIONAL</div>
+    <div class="loader-bar"><div class="loader-fill" id="loader-fill"></div></div>
+    <div class="loader-pct" id="loader-pct">000</div>
+  </div>
+</div>
+
+<!-- Three.js canvas -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- Vignette + grain -->
+<div class="vignette"></div>
+<div class="grain"></div>
+
+<!-- Nav -->
+<nav class="nav">
+  <a href="#" class="nav-logo" data-link>
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+      <circle cx="11" cy="11" r="10" stroke="currentColor" stroke-width="0.6" opacity="0.6"/>
+      <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="0.6"/>
+      <circle cx="11" cy="11" r="2" fill="currentColor"/>
+    </svg>
+    <span>UNIFICTIONAL</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#platform" data-link>Platform</a></li>
+    <li><a href="#pricing" data-link>Pricing</a></li>
+    <li><a href="#trust" data-link>Trust</a></li>
+    <li><a href="#contact" data-link>Contact</a></li>
+  </ul>
+  <a href="#pricing" class="nav-cta" data-link>
+    <span>See pricing</span>
+    <span class="cta-dot"></span>
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="line-mark"></span>
+      <span>EST. MMXXVI · UNIFIED AI</span>
+    </div>
+
+    <h1 class="hero-title">
+      <span class="line"><span class="word" data-split>Unified</span></span>
+      <span class="line"><span class="word italic" data-split>intelligence</span></span>
+      <span class="line"><span class="word" data-split>for</span> <span class="word" data-split>leads,</span></span>
+      <span class="line"><span class="word" data-split>ads</span> <span class="word ampersand" data-split>&</span> <span class="word" data-split>growth.</span></span>
+    </h1>
+
+    <p class="hero-sub">
+      One platform that gathers your AI ecosystem into a single, deliberate motion —
+      capturing leads, composing campaigns, and compounding revenue without the noise.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#pricing" class="btn btn-primary" data-link>
+        <span>See pricing</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7 H11.5 M11.5 7 L8 3.5 M11.5 7 L8 10.5" stroke="currentColor" stroke-width="1"/></svg>
+      </a>
+      <a href="#platform" class="btn btn-ghost" data-link>
+        <span>See the platform</span>
+      </a>
+    </div>
+
+    <div class="hero-trust">
+      <span>NO SETUP FEES</span><span class="dot-sep"></span>
+      <span>SOC 2 · GDPR</span><span class="dot-sep"></span>
+      <span>CANCEL ANYTIME</span>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>SCROLL</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- WHISPER MARQUEE -->
+<section class="marquee">
+  <div class="marquee-track">
+    <span>LEADS</span><span class="sep">·</span>
+    <span class="m-italic">unified</span><span class="sep">·</span>
+    <span>ADS</span><span class="sep">·</span>
+    <span class="m-italic">composed</span><span class="sep">·</span>
+    <span>GROWTH</span><span class="sep">·</span>
+    <span class="m-italic">compounding</span><span class="sep">·</span>
+    <span>LEADS</span><span class="sep">·</span>
+    <span class="m-italic">unified</span><span class="sep">·</span>
+    <span>ADS</span><span class="sep">·</span>
+    <span class="m-italic">composed</span><span class="sep">·</span>
+    <span>GROWTH</span><span class="sep">·</span>
+    <span class="m-italic">compounding</span><span class="sep">·</span>
+  </div>
+</section>
+
+<!-- PLATFORM / WHAT IT IS -->
+<section class="platform" id="platform">
+  <div class="section-head">
+    <span class="section-num">I · The Platform</span>
+    <h2 class="section-title">Three disciplines, <em>one</em> intelligence.</h2>
+    <p class="section-sub">
+      Built for operators who refuse the patchwork of seven SaaS dashboards.
+      Every signal is gathered, weighed, and acted upon in the same connected fabric.
+    </p>
+  </div>
+
+  <div class="platform-grid">
+    <article class="platform-card">
+      <div class="card-num">i</div>
+      <h3>Lead intelligence</h3>
+      <p>AI scoring, routing, and nurturing across every inbound channel — pipelines built around your actual sales motion.</p>
+      <ul>
+        <li>Real-time lead scoring</li>
+        <li>Custom pipelines &amp; funnels</li>
+        <li>Email &amp; SMS automation</li>
+        <li>CRM included</li>
+      </ul>
+    </article>
+    <article class="platform-card">
+      <div class="card-num">ii</div>
+      <h3>Ad composition</h3>
+      <p>Generation, placement, and optimization across Google, Meta, LinkedIn, and TikTok — managed by a system that learns weekly.</p>
+      <ul>
+        <li>AI ad generation</li>
+        <li>Multi-platform campaigns</li>
+        <li>Continuous budget rebalancing</li>
+        <li>Creative iteration on autopilot</li>
+      </ul>
+    </article>
+    <article class="platform-card">
+      <div class="card-num">iii</div>
+      <h3>Growth surface</h3>
+      <p>A bespoke website with embedded AI conversation, ready to capture, qualify, and convert from the first impression.</p>
+      <ul>
+        <li>Custom design &amp; build</li>
+        <li>AI chat &amp; capture</li>
+        <li>SEO-engineered foundation</li>
+        <li>Headless CMS</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-head section-head-center">
+    <span class="section-num">II · Pricing</span>
+    <h2 class="section-title">A measured <em>investment</em>.</h2>
+    <p class="section-sub">
+      Three tiers, each calibrated to a stage of growth.
+      Pick the tier that fits the stage. Cancel anytime — 30-day money-back guarantee.
+    </p>
+  </div>
+
+  <div class="tiers">
+    <!-- TIER 1 -->
+    <article class="tier" data-tier="1">
+      <div class="tier-canvas-wrap"><canvas data-tier-canvas="0"></canvas></div>
+      <div class="tier-head">
+        <span class="tier-num">Tier I</span>
+        <h3>Website &amp; AI</h3>
+        <p class="tier-desc">A bespoke site with embedded AI — built once, paid once.</p>
+      </div>
+      <div class="tier-price">
+        <span class="price-num">$2,500</span>
+        <span class="price-cadence">one-time</span>
+      </div>
+      <ul class="tier-list">
+        <li>Custom website design &amp; development</li>
+        <li>AI chatbot integration</li>
+        <li>Lead capture forms</li>
+        <li>Mobile responsive build</li>
+        <li>SEO foundations</li>
+        <li>Headless CMS</li>
+        <li>30 days of support</li>
+      </ul>
+      <a href="#contact" class="tier-cta" data-link>
+        <span>Commission a build</span>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6 H10 M10 6 L7 3 M10 6 L7 9" stroke="currentColor" stroke-width="1"/></svg>
+      </a>
+    </article>
+
+    <!-- TIER 2 -->
+    <article class="tier tier-featured" data-tier="2">
+      <div class="tier-badge">Most chosen</div>
+      <div class="tier-canvas-wrap"><canvas data-tier-canvas="1"></canvas></div>
+      <div class="tier-head">
+        <span class="tier-num">Tier II</span>
+        <h3>Premium AI Lead Management</h3>
+        <p class="tier-desc">A unified lead fabric, scored and nurtured continuously.</p>
+      </div>
+      <div class="tier-price">
+        <span class="price-num">$3,000</span>
+        <span class="price-cadence">/ month</span>
+      </div>
+      <ul class="tier-list">
+        <li>AI lead scoring &amp; routing</li>
+        <li>Automated lead nurturing</li>
+        <li>Custom pipelines &amp; funnels</li>
+        <li>Advanced analytics dashboard</li>
+        <li>Weekly reporting &amp; strategy calls</li>
+        <li>Email &amp; SMS automation</li>
+        <li>CRM system included</li>
+        <li>24 / 7 support</li>
+      </ul>
+      <a href="#contact" class="tier-cta tier-cta-primary" data-link>
+        <span>Get started</span>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6 H10 M10 6 L7 3 M10 6 L7 9" stroke="currentColor" stroke-width="1"/></svg>
+      </a>
+    </article>
+
+    <!-- TIER 3 -->
+    <article class="tier" data-tier="3">
+      <div class="tier-canvas-wrap"><canvas data-tier-canvas="2"></canvas></div>
+      <div class="tier-head">
+        <span class="tier-num">Tier III</span>
+        <h3>Complete Growth Suite</h3>
+        <p class="tier-desc">The full ecosystem — leads, ads, and the site that holds them.</p>
+      </div>
+      <div class="tier-price">
+        <span class="price-num">$4,000</span>
+        <span class="price-cadence">/ month</span>
+      </div>
+      <ul class="tier-list">
+        <li>Everything in Premium AI</li>
+        <li>AI ad generation &amp; management</li>
+        <li>Multi-platform ad campaigns</li>
+        <li>Custom website included</li>
+        <li>Advanced automation workflows</li>
+        <li>Dedicated account manager</li>
+        <li>Weekly strategy meetings</li>
+        <li>Priority support</li>
+        <li>Custom integrations</li>
+      </ul>
+      <a href="#contact" class="tier-cta" data-link>
+        <span>Speak with us</span>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6 H10 M10 6 L7 3 M10 6 L7 9" stroke="currentColor" stroke-width="1"/></svg>
+      </a>
+    </article>
+  </div>
+
+  <div class="pricing-foot">
+    <span>30-day money-back guarantee</span>
+    <span class="dot-sep"></span>
+    <span>Cancel anytime</span>
+    <span class="dot-sep"></span>
+    <span>No setup fees</span>
+  </div>
+</section>
+
+<!-- SHOWCASE -->
+<section class="showcase" id="showcase">
+  <div class="showcase-perspective">
+    <div class="showcase-grid">
+      <article class="site-card" style="--col:0;--row:0"><div class="site-frame"><i></i><i></i><i></i><span>masonbramble.co</span></div><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=520&amp;h=340&amp;fit=crop&amp;auto=format&amp;q=85" alt="Mason &amp; Bramble" loading="lazy"><span class="site-name">Mason &amp; Bramble</span></article>
+      <article class="site-card" style="--col:1;--row:0"><div class="site-frame"><i></i><i></i><i></i><span>northbeam.build</span></div><img src="https://images.unsplash.com/photo-1542621334-a254cf47733d?w=520&amp;h=340&amp;fit=crop&amp;auto=format&amp;q=85" alt="North Beam Co." loading="lazy"><span class="site-name">North Beam Co.</span></article>
+      <article class="site-card" style="--col:2;--row:0"><div class="site-frame"><i></i><i></i><i></i><span>cantilever.studio</span></div><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=520&amp;h=340&amp;fit=crop&amp;auto=format&amp;q=85" alt="Cantilever" loading="lazy"><span class="site-name">Cantilever Build</span></article>
+      <article class="site-card" style="--col:3;--row:0"><div class="site-frame"><i></i><i></i><i></i><span>halcyonbuild.com</span></div><img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=520&amp;h=340&amp;fit=crop&amp;auto=format&amp;q=85" alt="Halcyon" loading="lazy"><span class="site-name">Halcyon Construction</span></article>
+      <article class="site-card" style="--col:4;--row:0"><div class="site-frame"><i></i><i></i><i></i><span>stoneworks.co</span></div><img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=520&amp;h=340&amp;fit=crop&amp;auto=format&amp;q=85" alt="Stoneworks" loading="lazy"><span class="site-name">Stoneworks Studio</span></article>
+
+      <article class="site-card" style="--col:0;--row:1"><div class="site-frame"><i></i><i></i><i></i><span>fieldhouse.build</span></div><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=520&amp;h=340&amp;fit=crop&amp;auto=format&amp;q=85" alt="Fieldhouse" loading="lazy"><span class="site-name">Fieldhouse Build</span></article>
+      <article class="site-card" style="--col:1;--row:1"><div class="site-frame"><i></i><i></i><i></i><span>acrejoist.com</span></div><img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=520&amp;h=340&amp;fit=crop&amp;auto=format&amp;q=85" alt="Acre &amp; Joist" loading="lazy"><span class="site-name">Acre &amp; Joist</span></article>
+      <article class="site-card" style="--col:2;--row:1"><div class="site-frame"><i></i><i></i><i></i><span>brickfield.co</span></div><img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=520&amp;h=340&amp;fit=crop&amp;auto=format&amp;q=85" alt="Brickfield" loading="lazy"><span class="site-name">Brickfield Co.</span></article>
+      <article class="site-card" style="--col:3;--row:1"><div class="site-frame"><i></i><i></i><i></i><span>lumberlime.com</span></div><img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=520&amp;h=340&amp;fit=crop&amp;auto=format&amp;q=85" alt="Lumber &amp; Lime" loading="lazy"><span class="site-name">Lumber &amp; Lime</span></article>
+      <article class="site-card" style="--col:4;--row:1"><div class="site-frame"><i></i><i></i><i></i><span>ridgeline.renovations</span></div><img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=520&amp;h=340&amp;fit=crop&amp;auto=format&amp;q=85" alt="Ridgeline" loading="lazy"><span class="site-name">Ridgeline Renovations</span></article>
+
+      <article class="site-card" style="--col:0;--row:2"><div class="site-frame"><i></i><i></i><i></i><span>quarrybuilt.com</span></div><img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=520&amp;h=340&amp;fit=crop&amp;auto=format&amp;q=85" alt="Quarry Built" loading="lazy"><span class="site-name">Quarry Built</span></article>
+      <article class="site-card" style="--col:1;--row:2"><div class="site-frame"><i></i><i></i><i></i><span>northstar.build</span></div><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=520&amp;h=340&amp;fit=crop&amp;auto=format&amp;q=85" alt="Northstar" loading="lazy"><span class="site-name">Northstar Carpentry</span></article>
+      <article class="site-card" style="--col:2;--row:2"><div class="site-frame"><i></i><i></i><i></i><span>foundryhomes.com</span></div><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=520&amp;h=340&amp;fit=crop&amp;auto=format&amp;q=85" alt="Foundry" loading="lazy"><span class="site-name">Foundry Custom Homes</span></article>
+      <article class="site-card" style="--col:3;--row:2"><div class="site-frame"><i></i><i></i><i></i><span>plumbline.studio</span></div><img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?w=520&amp;h=340&amp;fit=crop&amp;auto=format&amp;q=85" alt="The Plumb Line" loading="lazy"><span class="site-name">The Plumb Line</span></article>
+      <article class="site-card" style="--col:4;--row:2"><div class="site-frame"><i></i><i></i><i></i><span>ateliermaison.fr</span></div><img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=520&amp;h=340&amp;fit=crop&amp;auto=format&amp;q=85" alt="Atelier Maison" loading="lazy"><span class="site-name">Atelier Maison</span></article>
+
+      <article class="site-card" style="--col:0;--row:3"><div class="site-frame"><i></i><i></i><i></i><span>concretepine.co</span></div><img src="https://images.unsplash.com/photo-1593696140826-c58b021acf8b?w=520&amp;h=340&amp;fit=crop&amp;auto=format&amp;q=85" alt="Concrete &amp; Pine" loading="lazy"><span class="site-name">Concrete &amp; Pine</span></article>
+      <article class="site-card" style="--col:1;--row:3"><div class="site-frame"><i></i><i></i><i></i><span>trowel.studio</span></div><img src="https://images.unsplash.com/photo-1571055107559-3e67626fa8be?w=520&amp;h=340&amp;fit=crop&amp;auto=format&amp;q=85" alt="Trowel" loading="lazy"><span class="site-name">Trowel Studio</span></article>
+      <article class="site-card" style="--col:2;--row:3"><div class="site-frame"><i></i><i></i><i></i><span>tideline.build</span></div><img src="https://images.unsplash.com/photo-1565182999561-18d7dc61c393?w=520&amp;h=340&amp;fit=crop&amp;auto=format&amp;q=85" alt="Tideline" loading="lazy"><span class="site-name">Tideline Builds</span></article>
+      <article class="site-card" style="--col:3;--row:3"><div class="site-frame"><i></i><i></i><i></i><span>marblemason.co</span></div><img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=520&amp;h=340&amp;fit=crop&amp;auto=format&amp;q=85" alt="Marble &amp; Mason" loading="lazy"><span class="site-name">Marble &amp; Mason</span></article>
+      <article class="site-card" style="--col:4;--row:3"><div class="site-frame"><i></i><i></i><i></i><span>pacificcrest.build</span></div><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=520&amp;h=340&amp;fit=crop&amp;auto=format&amp;q=85" alt="Pacific Crest" loading="lazy"><span class="site-name">Pacific Crest Build</span></article>
+    </div>
+
+    <div class="showcase-center">
+      <span class="section-num">In the wild</span>
+      <h2 class="showcase-title">Builders &amp; remodelers<br>running on <em>Unifictional</em>.</h2>
+      <p class="showcase-sub">Construction studios, custom-home builders, and remodelers shipping sites and ad campaigns with us today.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust" id="trust">
+  <div class="section-head section-head-center">
+    <span class="section-num">III · Trust</span>
+    <h2 class="section-title">Built on <em>quiet</em> infrastructure.</h2>
+  </div>
+  <div class="trust-grid">
+    <div class="trust-item">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4 L26 9 V18 C26 23 16 28 16 28 C16 28 6 23 6 18 V9 Z" stroke="currentColor" stroke-width="0.8"/><path d="M12 16 L15 19 L21 13" stroke="currentColor" stroke-width="0.8"/></svg>
+      <h4>SOC 2 Type II</h4>
+      <p>Audited controls across security, availability, and confidentiality.</p>
+    </div>
+    <div class="trust-item">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="0.8"/><path d="M4 16 H28 M16 4 C20 9 20 23 16 28 C12 23 12 9 16 4" stroke="currentColor" stroke-width="0.8"/></svg>
+      <h4>GDPR ready</h4>
+      <p>Data residency, processing agreements, and right-to-erasure built in.</p>
+    </div>
+    <div class="trust-item">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="6" y="14" width="20" height="14" rx="1" stroke="currentColor" stroke-width="0.8"/><path d="M11 14 V9 C11 6 13 4 16 4 C19 4 21 6 21 9 V14" stroke="currentColor" stroke-width="0.8"/></svg>
+      <h4>Enterprise encryption</h4>
+      <p>AES-256 at rest, TLS 1.3 in transit, scoped keys per workspace.</p>
+    </div>
+    <div class="trust-item">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="0.8"/><path d="M16 8 V16 L21 19" stroke="currentColor" stroke-width="0.8"/></svg>
+      <h4>Continuous uptime</h4>
+      <p>99.98% target with multi-region failover and observable SLAs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial">
+  <div class="testimonial-mark">
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><path d="M10 22 V14 H18 V22 C18 27 15 30 11 30 M22 22 V14 H30 V22 C30 27 27 30 23 30" stroke="currentColor" stroke-width="0.8"/></svg>
+  </div>
+  <blockquote>
+    <p>“We retired four point-tools in a quarter. The lead pipeline is now a single, legible <em>thing</em> — and revenue has never been more predictable.”</p>
+    <footer>
+      <span class="t-name">Marisol Vu</span>
+      <span class="t-role">VP Growth · Halcyon Atelier</span>
+    </footer>
+  </blockquote>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <span class="section-num">IV · Begin</span>
+    <h2 class="contact-title">An honest <em>conversation</em>.<br>A clear next step.</h2>
+    <p class="contact-sub">Tell us about the work. We reply within a single business day, by hand.</p>
+
+    <form class="contact-form" id="contact-form" novalidate>
+      <div class="form-row">
+        <label><span>Name</span><input type="text" name="name" required></label>
+        <label><span>Email</span><input type="email" name="email" required></label>
+      </div>
+      <label><span>Company</span><input type="text" name="company"></label>
+      <label><span>Tier of interest</span>
+        <select name="tier">
+          <option>Tier I — Website &amp; AI · $2,500</option>
+          <option selected>Tier II — Premium AI Lead · $3,000/mo</option>
+          <option>Tier III — Complete Growth · $4,000/mo</option>
+          <option>Not yet sure</option>
+        </select>
+      </label>
+      <label><span>Tell us more</span><textarea name="msg" rows="4" placeholder="What does growth look like for you right now?"></textarea></label>
+      <button type="submit" class="btn btn-primary btn-large">
+        <span>Send the brief</span>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7 H11.5 M11.5 7 L8 3.5 M11.5 7 L8 10.5" stroke="currentColor" stroke-width="1"/></svg>
+      </button>
+      <div class="form-success" id="form-success">Thank you. Your note is in the right hands. We'll reply within a business day.</div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-row">
+    <div class="footer-mark">
+      <svg width="56" height="56" viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="0.6" opacity="0.5"/>
+        <circle cx="24" cy="24" r="14" stroke="currentColor" stroke-width="0.6"/>
+        <circle cx="24" cy="24" r="4" fill="currentColor"/>
+      </svg>
+      <p>Unifictional, a unified intelligence for the operator who has had enough of the patchwork.</p>
+    </div>
+    <div class="footer-cols">
+      <div><h5>Platform</h5><a href="#">Lead intelligence</a><a href="#">Ad composition</a><a href="#">Growth surface</a></div>
+      <div><h5>Studio</h5><a href="#">About</a><a href="#">Manifesto</a><a href="#">Press</a></div>
+      <div><h5>Trust</h5><a href="#">Security</a><a href="#">Privacy</a><a href="#">DPA</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© MMXXVI · Unifictional</span>
+    <span>SOC 2 · GDPR · AES-256</span>
+  </div>
+</footer>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>
