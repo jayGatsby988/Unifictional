@@ -543,10 +543,10 @@ a, button, input, select, textarea, [data-link], [data-cursor] { cursor: none; }
 }
 .hero-bottom-word span {
   font-family: var(--serif);
-  font-size: clamp(3rem, 22vw, 22rem);
+  font-size: clamp(2.4rem, 13.5vw, 14rem);
   font-weight: 200;
   font-variation-settings: "opsz" 144, "SOFT" 100;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: rgba(237, 229, 208, 0.075);
   display: block;
@@ -558,7 +558,8 @@ a, button, input, select, textarea, [data-link], [data-cursor] { cursor: none; }
   .hero-side-text { display: none; }
   .hero-bottom-word { bottom: -0.08em; }
   .hero-bottom-word span {
-    font-size: clamp(2.5rem, 26vw, 8rem);
+    font-size: clamp(1.8rem, 16vw, 5rem);
+    letter-spacing: 0.03em;
     color: rgba(237, 229, 208, 0.06);
   }
 }
