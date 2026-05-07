@@ -463,8 +463,8 @@ const morphVert = /* glsl */`
     vec4 mv = modelViewMatrix * vec4(pos, 1.0);
     gl_Position = projectionMatrix * mv;
 
-    // Constant tiny size — sand-grain dots.
-    gl_PointSize = max(1.0, aSize * (14.0 / -mv.z) * uPixelRatio);
+    // Uniform 2-pixel dots regardless of depth.
+    gl_PointSize = 2.0 * uPixelRatio;
 
     // Alpha falloff for distance from origin
     float dist = length(pos);
@@ -501,10 +501,10 @@ const morphMat = new THREE.ShaderMaterial({
     uScrollT: { value: 0 },
     uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
     uMouse: { value: new THREE.Vector2() },
-    uColorDeep:   { value: new THREE.Color('#8a7340') },
-    uColorGold:   { value: new THREE.Color('#c9a961') },
-    uColorBright: { value: new THREE.Color('#f0d294') },
-    uColorCream:  { value: new THREE.Color('#ede5d0') },
+    uColorDeep:   { value: new THREE.Color('#4a3c20') },
+    uColorGold:   { value: new THREE.Color('#7a6535') },
+    uColorBright: { value: new THREE.Color('#998055') },
+    uColorCream:  { value: new THREE.Color('#7a6535') },
   },
   vertexShader: morphVert,
   fragmentShader: morphFrag,
@@ -881,10 +881,9 @@ function animate() {
   // Centered for the whole page — house scene sits in the middle for the hero,
   // and the later shapes (torus, 3 spheres, cube, galaxy) stay centered too.
   const targetY = -0.3;  // slight downshift so the house+trees feel anchored, not floating
-  // On mobile / portrait viewports the scene needs to be centred so the
-  // house/trees aren't pushed off-screen by the right-of-centre offset.
-  const targetX = MOBILE_LIKE ? 0 : 0.6;
-  morphPoints.position.x += (targetX - morphPoints.position.x) * 0.06;
+  // Centred horizontally on every device — the headline sits on top of
+  // the scene rather than off to one side of it.
+  morphPoints.position.x += (0 - morphPoints.position.x) * 0.06;
   morphPoints.position.y += (targetY - morphPoints.position.y) * 0.06;
 
   renderer.render(scene, camera);

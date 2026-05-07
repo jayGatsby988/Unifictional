@@ -327,16 +327,23 @@ a, button, input, select, textarea, [data-link], [data-cursor] { cursor: none; }
 }
 .hero-title {
   font-family: var(--serif);
-  font-size: clamp(2.4rem, 6.4vw, 6rem);
+  font-size: clamp(3rem, 9.5vw, 9rem);
   font-weight: 200;
   font-variation-settings: "opsz" 144, "SOFT" 50;
-  line-height: 0.94;
+  line-height: 0.98;
   letter-spacing: -0.035em;
-  margin-bottom: 2rem;
-  max-width: 14ch;
+  margin-bottom: 2.25rem;
+  max-width: 15ch;
   color: var(--ink-warm);
+  position: relative;
+  z-index: 4;
 }
-.hero-title .line { display: block; overflow: hidden; }
+.hero-title .line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.1em;     /* descender breathing room — fixes 'g' clip */
+  margin-bottom: -0.06em;
+}
 .hero-title .word { display: inline-block; }
 .hero-title .italic {
   font-style: italic;
@@ -360,12 +367,14 @@ a, button, input, select, textarea, [data-link], [data-cursor] { cursor: none; }
   50% { background-position: 100% 50%; }
 }
 .hero-sub {
-  font-size: clamp(0.92rem, 1.05vw, 1.05rem);
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
   color: var(--ink-dim);
   max-width: 48ch;
   line-height: 1.65;
   margin-bottom: 2.5rem;
   font-weight: 300;
+  position: relative;
+  z-index: 4;
 }
 .hero-actions {
   display: flex;
